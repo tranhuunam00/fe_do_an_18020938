@@ -1,0 +1,9 @@
+.footer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  width: 100%;
+  grid-template-rows: 20rem;
+  padding-top: 10rem;
+  background-color: var(--primary-background-footer);
+  color: #d3d3d3;
+}
