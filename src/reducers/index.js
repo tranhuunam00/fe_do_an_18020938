@@ -1,5 +1,8 @@
-// import { combineReducers } from "redux";
+import { combineReducers } from "redux";
+import modalReducers from "../features/modal/modalSlice";
 
-// const myReducer = combineReducers({});
+const myReducer = combineReducers({
+  modal: modalReducers,
+});
 
-// export default myReducer;
+export default myReducer;

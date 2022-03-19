@@ -1,7 +1,14 @@
 import clsx from "clsx";
 import styles from "./styles.module.scss";
-
+import { useSelector, useDispatch } from "react-redux";
+import { selectorModal, modalActions } from "../../features/modal/modalSlice";
 const Header = () => {
+  const dispatch = useDispatch();
+  const show = useSelector(selectorModal);
+  const handleShow = () => {
+    dispatch(modalActions.showModal());
+    dispatch(modalActions.changeComponent("login"));
+  };
   return (
     <div className={`${styles.header} `}>
       <div className={`${styles.header_navbar}`}>
@@ -20,7 +27,15 @@ const Header = () => {
         <a href="#">Khóa học</a>
       </div>
       <div className={`${styles.header_auth}`}>
-        <button className={styles.auth_login}>login</button>
+        <button
+          className={styles.auth_login}
+          onClick={() => {
+            console.log(show);
+            handleShow();
+          }}
+        >
+          login
+        </button>
         <button className={styles.auth_signin}>sign-in</button>
       </div>
     </div>

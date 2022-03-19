@@ -1,8 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import countReducer from "../features/counter/counterSlice";
-import todosReducer from "../features/todos/todosSlice";
+import myReducer from "../reducers";
 
 const store = configureStore({
-  reducer: { counter: countReducer, todos: todosReducer },
+  reducer: myReducer,
 });
 export default store;

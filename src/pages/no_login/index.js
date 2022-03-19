@@ -8,8 +8,42 @@ import bodyContent3 from "../../assets/img/nologin_body_content_3.jpg";
 import bodyContent4 from "../../assets/img/nologin_body_content_4.jpg";
 import bodyPost1 from "../../assets/img/nologin_body_post1.jpg";
 import Footer from "../../commoms/footer/index";
+import LoginModal from "../../commoms/auth/login/index";
+import { useSelector } from "react-redux";
+import { selectorModal } from "../../features/modal/modalSlice";
+
 function HomeNoLogin() {
-  const classes = clsx(styles.btn);
+  const show = useSelector(selectorModal);
+
+  const CardStyle = ({ lable, info, buttonText }) => {
+    return (
+      <div className={styles.body_info__card}>
+        <h2>{lable}</h2>
+        <p>{info}</p>
+        <button className={styles.button}>{buttonText}</button>
+      </div>
+    );
+  };
+  //
+  const CardStyleImg = ({ img, lable, info, buttonText }) => {
+    return (
+      <div className={styles.body_content_card}>
+        <div
+          className={styles.body_content_card_img}
+          style={{
+            backgroundImage: `url(${img})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "contain",
+          }}
+        ></div>
+        <div className={styles.body_content_card_text}>
+          <h2>{lable}</h2>
+          <p>{info}</p>
+          <button className={styles.button}>{buttonText}</button>
+        </div>
+      </div>
+    );
+  };
   return (
     <div style={{ height: "1500px" }}>
       <div
@@ -30,128 +64,98 @@ function HomeNoLogin() {
       </div>
       <div className={styles.body}>
         <div className={styles.body_info}>
-          <div className={styles.body_info__card}>
-            <h2>Công nghệ</h2>
-            <p>
-              Những công nghệ tiên tiến như <br /> Tưới nước tự động, Kiểm soát
-              độ ẩm
-            </p>
-            <button className={styles.button}>Tìm hiểu</button>
-          </div>
-          <div className={styles.body_info__card}>
-            <h2>Cây đặc biệt</h2>
-            <p>Hướng dẫn chăm sóc các loài cây Bonsai phổ biến nhất</p>
-            <button className={styles.button}>Tìm hiểu</button>
-          </div>
-
-          <div className={styles.body_info__card}>
-            <h2>Khóa học Online</h2>
-            <p>
-              Học hỏi từ các bậc thầy về Bonsai trong các khóa học trực tuyến
-              cao cấp của chúng tôi
-            </p>
-            <button className={styles.button}>Tìm hiểu</button>
-          </div>
+          <CardStyle
+            lable="Công nghệ"
+            info="Những công nghệ tiên tiến như <br /> Tưới nước tự động, Kiểm soát
+              độ ẩm"
+            buttonText="Tìm hiểu"
+          />
+          <CardStyle
+            lable="Cây đặc biệt"
+            info="Hướng dẫn chăm sóc các loài cây Bonsai phổ biến nhất"
+            buttonText="Tìm hiểu"
+          />
+          <CardStyle
+            lable="Khóa học Online"
+            info=" Học hỏi từ các bậc thầy về Bonsai trong các khóa học trực tuyến
+            cao cấp của chúng tôi"
+            buttonText="Tìm hiểu"
+          />
         </div>
 
         <div className={styles.body_content}>
-          <div className={styles.body_content_card}>
-            <div
-              className={styles.body_content_card_img}
-              style={{
-                backgroundImage: `url(${bodyContent1})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-              }}
-            ></div>
-            <div className={styles.body_content_card_text}>
-              <h2>Chăm sóc cây cảnh</h2>
-              <p>
-                Giữ cho một cây Bonsai sống sót không phải là một nhiệm vụ khó
+          <CardStyleImg
+            img={bodyContent1}
+            lable="Chăm sóc cây cảnh"
+            info="Giữ cho một cây Bonsai sống sót không phải là một nhiệm vụ khó
                 khăn, nhưng có một số điều bạn cần lưu ý. Cây bonsai được trồng
                 trong các chậu nhỏ với không gian tối thiểu để dự trữ nước và
                 chất dinh dưỡng.Điều đó có nghĩa là bạn cần phải tưới nước và
                 bón phân cho cây thường xuyên. Đảm bảo Bonsai của bạn có nhiều
                 ánh sáng, nước và bón phân khi cần thiết và cây của bạn chắc
-                chắn sẽ phát triển mạnh!
-              </p>
-              <button className={styles.button}>Quan tâm</button>
-            </div>
-          </div>
+                chắn sẽ phát triển mạnh!"
+            buttonText="Quan tâm"
+          />
           {/*  */}
-          <div className={styles.body_content_card}>
-            <div
-              className={styles.body_content_card_img}
-              style={{
-                backgroundImage: `url(${bodyContent2})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-              }}
-            ></div>
-            <div className={styles.body_content_card_text}>
-              <h2>Chăm sóc cây cảnh</h2>
-              <p>
-                Giữ cho một cây Bonsai sống sót không phải là một nhiệm vụ khó
+          <CardStyleImg
+            img={bodyContent2}
+            lable="Chăm sóc cây cảnh"
+            info="Giữ cho một cây Bonsai sống sót không phải là một nhiệm vụ khó
                 khăn, nhưng có một số điều bạn cần lưu ý. Cây bonsai được trồng
                 trong các chậu nhỏ với không gian tối thiểu để dự trữ nước và
                 chất dinh dưỡng.Điều đó có nghĩa là bạn cần phải tưới nước và
                 bón phân cho cây thường xuyên. Đảm bảo Bonsai của bạn có nhiều
                 ánh sáng, nước và bón phân khi cần thiết và cây của bạn chắc
-                chắn sẽ phát triển mạnh!
-              </p>
-              <button className={styles.button}>Quan tâm</button>
-            </div>
-          </div>
+                chắn sẽ phát triển mạnh!"
+            buttonText="Quan tâm"
+          />
           {/*  */}
-          <div className={styles.body_content_card}>
-            <div
-              className={styles.body_content_card_img}
-              style={{
-                backgroundImage: `url(${bodyContent3})`,
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "contain",
-              }}
-            ></div>
-            <div className={styles.body_content_card_text}>
-              <h2>Chăm sóc cây cảnh</h2>
-              <p>
-                Giữ cho một cây Bonsai sống sót không phải là một nhiệm vụ khó
+          <CardStyleImg
+            img={bodyContent3}
+            lable="Chăm sóc cây cảnh"
+            info="Giữ cho một cây Bonsai sống sót không phải là một nhiệm vụ khó
                 khăn, nhưng có một số điều bạn cần lưu ý. Cây bonsai được trồng
                 trong các chậu nhỏ với không gian tối thiểu để dự trữ nước và
                 chất dinh dưỡng.Điều đó có nghĩa là bạn cần phải tưới nước và
                 bón phân cho cây thường xuyên. Đảm bảo Bonsai của bạn có nhiều
                 ánh sáng, nước và bón phân khi cần thiết và cây của bạn chắc
-                chắn sẽ phát triển mạnh!
-              </p>
-              <button className={styles.button}>Quan tâm</button>
-            </div>
-          </div>
+                chắn sẽ phát triển mạnh!"
+            buttonText="Quan tâm"
+          />
+
+          <CardStyleImg
+            img={bodyContent4}
+            lable="Chăm sóc cây cảnh"
+            info="Giữ cho một cây Bonsai sống sót không phải là một nhiệm vụ khó
+                khăn, nhưng có một số điều bạn cần lưu ý. Cây bonsai được trồng
+                trong các chậu nhỏ với không gian tối thiểu để dự trữ nước và
+                chất dinh dưỡng.Điều đó có nghĩa là bạn cần phải tưới nước và
+                bón phân cho cây thường xuyên. Đảm bảo Bonsai của bạn có nhiều
+                ánh sáng, nước và bón phân khi cần thiết và cây của bạn chắc
+                chắn sẽ phát triển mạnh!"
+            buttonText="Quan tâm"
+          />
         </div>
 
         {/*  */}
         <div className={`${styles.body_info} ${styles.body_question}`}>
-          <div className={styles.body_info__card}>
-            <h2>Công nghệ</h2>
-            <p>
-              Những công nghệ tiên tiến như <br /> Tưới nước tự động, Kiểm soát
-              độ ẩm
-            </p>
-            <button className={styles.button}>Tìm hiểu</button>
-          </div>
-          <div className={styles.body_info__card}>
-            <h2>Cây đặc biệt</h2>
-            <p>Hướng dẫn chăm sóc các loài cây Bonsai phổ biến nhất</p>
-            <button className={styles.button}>Tìm hiểu</button>
-          </div>
-
-          <div className={styles.body_info__card}>
-            <h2>Khóa học Online</h2>
-            <p>
-              Học hỏi từ các bậc thầy về Bonsai trong các khóa học trực tuyến
-              cao cấp của chúng tôi
-            </p>
-            <button className={styles.button}>Tìm hiểu</button>
-          </div>
+          <CardStyle
+            lable="Công nghệ"
+            info="Những công nghệ tiên tiến như <br /> Tưới nước tự động, Kiểm soát
+              độ ẩm"
+            buttonText="Tìm hiểu"
+          />
+          <CardStyle
+            lable="Cây đặc biệt"
+            info="Hướng dẫn chăm sóc các loài cây Bonsai phổ biến nhất"
+            buttonText="Tìm hiểu"
+          />
+          <CardStyle
+            lable="Khóa học Online"
+            info=" Học hỏi từ các bậc thầy về Bonsai trong các khóa học trực tuyến
+            cao cấp của chúng tôi"
+            buttonText="Tìm hiểu"
+          />
         </div>
         {/*  */}
 
@@ -188,6 +192,7 @@ function HomeNoLogin() {
       </div>
       <Header />
       <Footer />
+      <LoginModal undisplay={show.component === "login" ? !show.show : true} />
     </div>
   );
 }
