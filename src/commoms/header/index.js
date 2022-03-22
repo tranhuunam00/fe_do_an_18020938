@@ -2,13 +2,10 @@ import clsx from "clsx";
 import styles from "./styles.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { selectorModal, modalActions } from "../../features/modal/modalSlice";
+import { Link } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
-  const show = useSelector(selectorModal);
-  const handleShow = () => {
-    dispatch(modalActions.showModal());
-    dispatch(modalActions.changeComponent("login"));
-  };
+
   return (
     <div className={`${styles.header} `}>
       <div className={`${styles.header_navbar}`}>
@@ -26,17 +23,13 @@ const Header = () => {
         <a href="#">Cửa hàng</a>
         <a href="#">Khóa học</a>
       </div>
-      <div className={`${styles.header_auth}`}>
-        <button
-          className={styles.auth_login}
-          onClick={() => {
-            console.log(show);
-            handleShow();
-          }}
-        >
-          login
-        </button>
-        <button className={styles.auth_signin}>sign-in</button>
+      <div className={styles.header_auth}>
+        <Link className={styles.header_auth_login} to="/login">
+          Login
+        </Link>
+        <Link to="/register" className={styles.header_auth_register}>
+          Đăng ký
+        </Link>
       </div>
     </div>
   );

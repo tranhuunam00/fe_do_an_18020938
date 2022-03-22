@@ -4,8 +4,10 @@ import HomeNoLogin from "./pages/no_login/index";
 
 import UserContext from "./context_api/user/context";
 import React, { useContext, useEffect } from "react";
-import { render } from "react-dom";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Register from "./pages/no_login/register";
+import Login from "./pages/no_login/login";
+import ForgotPassword from "./pages/no_login/forgotPasword";
 
 function App() {
   const [userState] = useContext(UserContext);
@@ -14,13 +16,18 @@ function App() {
   }, [userState]);
   return (
     <div className="App">
-      <Routes>
-        {userState.user.token ? (
+      {userState.user.token ? (
+        <Routes>
           <Route index element={<Counter />} />
-        ) : (
-          <Route index element={<HomeNoLogin />} />
-        )}
-      </Routes>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<HomeNoLogin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+        </Routes>
+      )}
     </div>
   );
 }

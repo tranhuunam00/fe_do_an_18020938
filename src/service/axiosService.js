@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const instance = axios.create();
+const instance = axios.create({
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json",
+  },
+});
 
 const handleSuccess = (response) => {
   return response;

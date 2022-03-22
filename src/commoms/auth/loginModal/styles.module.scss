@@ -26,9 +26,10 @@
     padding-right: 5em;
     text-align: start;
     &__header {
-      margin-top: 2em;
+      margin-top: 1em;
       margin-bottom: 1em;
       font-size: 3em;
+      position: relative;
     }
     &__lable {
       font-size: 1.6rem;

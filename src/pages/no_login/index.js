@@ -8,7 +8,7 @@ import bodyContent3 from "../../assets/img/nologin_body_content_3.jpg";
 import bodyContent4 from "../../assets/img/nologin_body_content_4.jpg";
 import bodyPost1 from "../../assets/img/nologin_body_post1.jpg";
 import Footer from "../../commoms/footer/index";
-import LoginModal from "../../commoms/auth/login/index";
+import LoginModal from "../../commoms/auth/loginModal/index";
 import { useSelector } from "react-redux";
 import { selectorModal } from "../../features/modal/modalSlice";
 
@@ -45,7 +45,7 @@ function HomeNoLogin() {
     );
   };
   return (
-    <div style={{ height: "1500px" }}>
+    <div>
       <div
         className={styles.banner}
         style={{
@@ -190,6 +190,7 @@ function HomeNoLogin() {
           </div>
         </div>
       </div>
+
       <Header />
       <Footer />
       <LoginModal undisplay={show.component === "login" ? !show.show : true} />

@@ -32,3 +32,12 @@ button {
   --primary-background-color: #f5f5f5;
   --primary-background-footer: #323232;
 }
+.disabled {
+  background-color: #ccc;
+}
+.undisabled {
+  background-color: var(--primary-color);
+}
+.undisabled:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
