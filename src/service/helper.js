@@ -9,3 +9,20 @@ export const checkError = (error) => {
   }
   return false;
 };
+
+export const convertMessageFromData = (data) => {
+  let res = "";
+  switch (data) {
+    case "SUCCESS":
+      res = " thành công!";
+      break;
+    case "FAIL":
+      res = " thất bại!";
+      break;
+    case "User not found":
+      res = " người dùng không tồn tại!";
+      break;
+    default:
+  }
+  return res;
+};

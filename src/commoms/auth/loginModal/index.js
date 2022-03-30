@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import * as apis from "../../../api/auth";
 import userProvider from "../../../context_api/user/context";
 import { useDispatch } from "react-redux";
-import { modalActions } from "../../../features/modal/modalSlice";
+import { modalActions } from "../../../redux/features/modal/modalSlice";
 const LoginModal = (props) => {
   const dispatchRedux = useDispatch();
   const display = clsx({

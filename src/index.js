@@ -6,23 +6,25 @@ import reportWebVitals from "./reportWebVitals";
 import store from "./redux/store";
 import { Provider } from "react-redux";
 import UserProvider from "./context_api/user/provider";
+import SocketProvider from "./context_api/socketIo/provider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Counter from "./components/Counter";
-
+import { toast } from "react-toastify";
+import ScrollToTop from "./components/scrollToTop";
+toast.configure();
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <Provider store={store}>
-          <App />
-        </Provider>
+        <SocketProvider>
+          <Provider store={store}>
+            <ScrollToTop />
+            <App />
+          </Provider>
+        </SocketProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

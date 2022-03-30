@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import styles from "./styles.module.scss";
 import Header from "../../commoms/header";
 import bannerImg from "../../assets/img/banner4.jpg";
@@ -10,10 +9,16 @@ import bodyPost1 from "../../assets/img/nologin_body_post1.jpg";
 import Footer from "../../commoms/footer/index";
 import LoginModal from "../../commoms/auth/loginModal/index";
 import { useSelector } from "react-redux";
-import { selectorModal } from "../../features/modal/modalSlice";
-
+import { useContext } from "react";
+import { selectorModal } from "../../redux/features/modal/modalSlice";
+import SocketContext from "../../context_api/socketIo/context";
+import Banner from "../../commoms/banner";
 function HomeNoLogin() {
   const show = useSelector(selectorModal);
+
+  const [socketIo] = useContext(SocketContext);
+  console.log(socketIo);
+  // socketIo.emit("test", "con voi");
 
   const CardStyle = ({ lable, info, buttonText }) => {
     return (
@@ -46,22 +51,7 @@ function HomeNoLogin() {
   };
   return (
     <div>
-      <div
-        className={styles.banner}
-        style={{
-          backgroundImage: `url(${bannerImg})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain",
-        }}
-      >
-        <div className={styles.banner_content}>
-          <h1>The living</h1>
-          <h1>art of Bonsai</h1>
-          <div className={styles.banner_description}>
-            <p>Thú chơi tao nhã cho người thảnh thơi!</p>
-          </div>
-        </div>
-      </div>
+      <Banner bannerImg={bannerImg} />
       <div className={styles.body}>
         <div className={styles.body_info}>
           <CardStyle

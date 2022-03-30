@@ -3,6 +3,7 @@ import Footer from "../footer";
 
 const Layout = ({ children }) => {
   console.log(children);
+  console.log("huhi");
   return (
     <div>
       <Header></Header>

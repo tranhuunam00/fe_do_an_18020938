@@ -1,13 +1,15 @@
 import styles from "./styles.module.scss";
-import clsx from "clsx";
 import { useState, useContext } from "react";
 import * as apis from "../../../api/auth";
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import linkImg from "../../../assets/linkImg";
 import userProvider from "../../../context_api/user/context";
 import Input from "../../../commoms/input";
 import { checkError } from "../../../service/helper";
+import { GoogleLogin } from "react-google-login";
+import toastService from "../../../service/toast";
+import Footer from "../../../commoms/footer/index";
+
 const Login = (props) => {
   const [user, dispatch] = useContext(userProvider);
 
@@ -21,23 +23,34 @@ const Login = (props) => {
     setError({ ...error, [name]: valueError });
     setInput({ ...input, [name]: valueInput });
   };
+  console.log(error);
+  console.log(!checkError(error));
 
   const handleSubmit = async (events) => {
-    events.preventDefault();
+    try {
+      events.preventDefault();
+      dispatch({ type: "SHOW_LOADING" });
 
-    const data = await apis.login(input);
-    if (data.status == 200) {
-      dispatch({ type: "ADD_USER", payload: data.data.data });
+      const data = await apis.login(input);
+
+      if (data.status == 200) {
+        dispatch({ type: "ADD_USER", payload: data.data.data });
+      }
+
+      dispatch({ type: "HIDE_LOADING" });
+      toastService(data);
+    } catch (err) {
+      toastService(err.message);
+      dispatch({ type: "HIDE_LOADING" });
     }
   };
-  const handleLoginGoogle = (events) => {
-    events.preventDefault();
 
-    apis.loginGoogle();
+  const responseGoogle = (response) => {
+    console.log(response);
   };
   return (
     <div className={styles.loginForm}>
-      <form>
+      <form method="get" action={`http://localhost:5000/api/auths/google`}>
         <div className={styles.loginForm_content}>
           <div className={styles.loginForm_content__header}>
             <h1 className={styles.loginForm_content__header__text}>
@@ -45,7 +58,6 @@ const Login = (props) => {
             </h1>
             <img src={linkImg.logoImg}></img>
           </div>
-
           <Input
             lable="Email"
             name="email"
@@ -62,36 +74,28 @@ const Login = (props) => {
             handleInput={handleInput}
             minLength={6}
           />
-
           <button
-            disabled={!checkError(error) ? false : true}
             className={!checkError(error) ? "undisabled" : "disabled"}
             type="submit"
-            onClick={(events) =>
+            onClick={(events) => {
+              console.log("hehe");
               !checkError(error)
                 ? handleSubmit(events)
-                : events.preventDefault()
-            }
+                : events.preventDefault();
+            }}
           >
             Đăng nhập
           </button>
+          <GoogleLogin
+            clientId="538083935372-25hfb8q8gute01d17orr12d0139hk159.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
 
-          <button type="submit" onClick={(events) => handleLoginGoogle(events)}>
-            Login google
-          </button>
+          {/* <button type="submit">login chay</button> */}
 
-          {/* <button
-            disabled={!checkError(error) ? false : true}
-            className={!checkError(error) ? "undisabled" : "disabled"}
-            type="submit"
-            onClick={(events) =>
-              !checkError(error)
-                ? handleSubmit(events)
-                : events.preventDefault()
-            }
-          >
-            Đăng nhập Google
-          </button> */}
           <Link
             className={styles.loginModal_content__forgot}
             to="/forgot-password"
@@ -103,6 +107,7 @@ const Login = (props) => {
           </p>
         </div>
       </form>
+      <Footer />
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import modalReducers from "../features/modal/modalSlice";
-import couterReducers from "../features/counter/counterSlice";
-
+import authReducers from "../features/auth/authSlice";
 const myReducer = combineReducers({
   modal: modalReducers,
-  counter: couterReducers,
+  auth:authReducers
+
 });
 
 export default myReducer;

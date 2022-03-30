@@ -1,4 +1,6 @@
+$is-view: false;
 .header {
+  // margin: 0 5rem;
   padding: 0 5%;
   max-width: 1440px;
   height: 7rem;
@@ -7,30 +9,23 @@
   align-items: center;
   justify-content: space-between;
   position: fixed;
+  z-index: 2;
   top: 0;
   left: 0;
   right: 0;
 
-  button {
-    font-size: 1.6rem;
-    width: 10rem;
-    height: 3.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #ccc;
-  }
   &_auth {
     // align-items: flex-end;
-    width: 20%;
+    min-width: 20%;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    position: relative;
     a {
       padding: 0.5em;
       font-size: 16px;
+      font-weight: 500;
+
       text-decoration: none;
       // background-color: #000;
       border-radius: 4px;
@@ -45,33 +40,88 @@
     &_register {
       background-color: var(--primary-color);
     }
+    button {
+      font-weight: 500;
+      letter-spacing: 1px;
+      position: relative;
+      font-size: 1.6rem;
+      width: 10rem;
+      height: 3.5rem;
+      border-radius: 5px;
+      box-shadow: 0px 8px 20px rgb(0 0 0 /20%);
+
+      border: 1px solid #ccc;
+      cursor: pointer;
+      &::after {
+        content: " ";
+        position: absolute;
+        width: 10rem;
+        height: 4rem;
+        left: 0;
+        top: 100%;
+        // background-color: blue;
+      }
+    }
+
+    button:hover {
+      background-color: #ccc;
+      $is-view: true;
+    }
+
+    &_list {
+      display: none;
+      width: 20rem;
+      box-shadow: 0px 8px 20px rgb(0 0 0 /20%);
+      height: 30rem;
+      position: absolute;
+      border-radius: 3px;
+      top: 200%;
+      background-color: white;
+      // display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+
+      img {
+        width: 60%;
+        height: 60%;
+      }
+      a {
+        // box-shadow: 0px 8px 20px rgb(0 0 0 /5%);
+        margin: 0rem 0;
+        width: 70%;
+        border-radius: 4px;
+        // background-color: var(--primary-color);
+        color: var(--primary-color);
+      }
+    }
+  }
+  &_navbar {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    &_logo {
+      cursor: pointer;
+    }
+    a {
+      width: 12%;
+      text-decoration: none;
+      font-size: 1.6rem;
+      position: relative;
+      color: #000;
+    }
+
+    // a:after {
+    //   content: "";
+    //   position: absolute;
+    //   height: 100%;
+    //   width: 1px;
+    //   background-color: #000;
+    //   right: 0px;
+    //   top: 0;
+    // }
   }
 }
-p {
-  font-size: 1.6rem;
-}
-
-.header_navbar {
+.header_auth:hover .header_auth_list {
   display: flex;
-  align-items: center;
-
-  a {
-    width: 11rem;
-    text-decoration: none;
-    font-size: 1.6rem;
-    position: relative;
-    color: #000;
-  }
-  // a:after {
-  //   content: "";
-  //   position: absolute;
-  //   height: 100%;
-  //   width: 1px;
-  //   background-color: #000;
-  //   right: 0px;
-  //   top: 0;
-  // }
-}
-.navbar_logo {
-  padding-right: 5%;
 }
