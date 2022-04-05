@@ -6,7 +6,6 @@ const initState = {
       },
 };
 
-console.log(localStorage.getItem("USER"));
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_USER":

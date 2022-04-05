@@ -20,23 +20,26 @@ import Store from "./pages/customer/store";
 import { toast } from "react-toastify";
 function App() {
   const [userState] = useContext(UserContext);
-  const [setSocketIo] = useContext(SocketContext);
-  toast.info("connect socket");
+  const [socketState, setSocketIo] = useContext(SocketContext);
+  // toast.info("connect socket");
   useEffect(() => {
     if (userState.user._id) {
       toast.info(process.env.REACT_APP_API_ENDPOIND);
       var socket = socketClient(
-        process.env.REACT_APP_API_ENDPOIND ||
-          "https://tranhuunam18020938-do-an.herokuapp.com"
+        "https://tranhuunam18020938-do-an.herokuapp.com"
       );
-      setSocketIo(socket);
+
       if (socket) {
         socket.emit("test", "reactJs connect");
         socket.on("return", (data) => {
           toast.info(data);
         });
       }
+      setSocketIo(socket);
     }
+    return () => {
+      socket.emit("disconnected", "out");
+    };
   }, [userState.user._id]);
 
   useEffect(() => {
