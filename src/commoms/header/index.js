@@ -4,18 +4,25 @@ import UserContext from "../../context_api/user/context";
 import { useContext } from "react";
 import linkImg from "../../assets/linkImg";
 import { Link, useNavigate } from "react-router-dom";
+import * as authApi from "../../api/auth";
 // import toastService from "../../../service/toast";
 
 const Header = () => {
   const [userState, dispatch] = useContext(UserContext);
+  const valueUserLocal = JSON.parse(localStorage.getItem("user"));
+  const token = localStorage.getItem("token");
+  const refreshToken = localStorage.getItem("refreshToken");
 
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    // event.preventDefault();
-    console.log("hihi");
+  const handleLogout = async () => {
+    await authApi.logout({
+      token: token,
+      refreshToken: refreshToken,
+    });
+
     localStorage.clear();
-    delete userState.user.token;
+
     dispatch({ type: "REMOVE_USER" });
 
     return navigate(`/`);
@@ -41,7 +48,7 @@ const Header = () => {
         <a href="#">Cửa hàng</a>
         <a href="#">Khóa học</a>
       </div>
-      {!userState.user.token ? (
+      {!userState.user._id ? (
         <div className={styles.header_auth}>
           <Link className={styles.header_auth_login} to="/login">
             Login
@@ -63,7 +70,6 @@ const Header = () => {
             <Link to="/cart">Khóa học</Link>
             <button
               onClick={() => {
-                console.log("gg");
                 handleLogout();
               }}
             >

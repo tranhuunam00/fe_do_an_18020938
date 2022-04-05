@@ -20,9 +20,8 @@ const convertMessageRegister = (status) => {
 };
 
 const toastService = (data) => {
-  console.log(data);
   const message = convertMessageRegister(data.data.message);
-  console.log(message);
+
   if (data.status == 200 || data.status == 201 || data.status == 203) {
     return toast.success(message);
   }

@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import * as apis from "../../../api/auth";
 import { useDispatch } from "react-redux";
 import linkImg from "../../../assets/linkImg";
-import Input from "../../../commoms/input";
+import Input from "../../../components/input";
 import { checkError } from "../../../service/helper";
 import userProvider from "../../../context_api/user/context";
 import queryString from "query-string";

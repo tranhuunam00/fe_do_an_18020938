@@ -1,0 +1,110 @@
+.card {
+  box-shadow: 0px 10px 20px rgb(0 0 0 /3%);
+  border-radius: 8px;
+  // padding: 2rem 2rem;
+  max-width: 40rem;
+  height: 100%;
+  position: relative;
+
+  img {
+    border-radius: 5px;
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  &_name {
+    line-height: 2.3rem;
+    font-weight: 400;
+    font-size: 1.8rem;
+    padding: 1.2rem 0;
+    margin-right: 1rem;
+  }
+  &_price {
+    font-size: 1.4rem;
+    text-decoration: underline;
+    // padding-bottom: 0.5rem;
+  }
+  &_description {
+    letter-spacing: 0.4px;
+    font-size: 1.4rem;
+    padding-bottom: 1rem;
+  }
+  &:hover &_hover {
+    display: block;
+  }
+  &_hover {
+    cursor: pointer;
+    display: none;
+    box-shadow: 0px 8px 12px rgb(0 0 0 /50%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: #000;
+    &_background {
+      width: 100%;
+      height: 100%;
+
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+    &_content {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+
+      &_name {
+        line-height: 2.3rem;
+        font-weight: 400;
+        font-size: 1.8rem;
+        padding: 1.2rem 0;
+        margin-right: 1rem;
+      }
+      &_price {
+        font-size: 1.4rem;
+        text-decoration: underline;
+        padding-bottom: 1rem;
+      }
+      &_description {
+        letter-spacing: 0.4px;
+        font-size: 1.2rem;
+        padding-bottom: 1rem;
+      }
+      &_add {
+        display: flex;
+        &_number {
+          width: 30px;
+          height: 30px;
+          background-color: rgba(169, 72, 30, 0.8);
+          text-align: center;
+          line-height: 30px;
+        }
+        &_cart {
+          cursor: pointer;
+          border: none;
+          background-color: var(--primary-color);
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.p1r {
+  padding: 0 1rem;
+}

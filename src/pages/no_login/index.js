@@ -17,7 +17,7 @@ function HomeNoLogin() {
   const show = useSelector(selectorModal);
 
   const [socketIo] = useContext(SocketContext);
-  console.log(socketIo);
+
   // socketIo.emit("test", "con voi");
 
   const CardStyle = ({ lable, info, buttonText }) => {

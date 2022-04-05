@@ -4,4 +4,13 @@ import cartSvg from "./img/cart.svg";
 import seaImg from "./img/sea.jpg";
 import cameraSvg from "./img/camera.svg";
 import penSvg from "./img/pen.svg";
-export default { logoImg, loadingGif, cartSvg, seaImg, cameraSvg, penSvg };
+import hotGirlVnu from "./img/hotgirlVnu.jpg";
+export default {
+  logoImg,
+  loadingGif,
+  cartSvg,
+  seaImg,
+  cameraSvg,
+  penSvg,
+  hotGirlVnu,
+};

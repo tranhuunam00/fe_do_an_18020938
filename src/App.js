@@ -5,7 +5,7 @@ import socketClient from "socket.io-client";
 
 import UserContext from "./context_api/user/context";
 import SocketContext from "./context_api/socketIo/context";
-
+import * as enums from "./constants/enums";
 import React, { useContext, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Register from "./pages/no_login/register";
@@ -14,12 +14,13 @@ import ForgotPassword from "./pages/no_login/forgotPasword";
 import Loading from "./commoms/loading/index";
 import Notify from "./pages/no_login/notify";
 import ResetPassword from "./pages/no_login/resetPassword";
-import Store from "./pages/has_login/store";
+
 import NotifyPush from "./pages/has_login/notificationPush";
 import * as contants from "./constants/constants";
 import Profile from "./pages/has_login/profile/index";
+import Store from "./pages/customer/store";
 function App() {
-  const [userState] = useContext(UserContext);
+  const [userState, dispatch] = useContext(UserContext);
   const [socketIo, setSocketIo] = useContext(SocketContext);
 
   useEffect(() => {
@@ -31,13 +32,46 @@ function App() {
         socket.on("return", (data) => console.log(data));
       }
     }
-  }, [userState]);
+  }, [userState.user._id]);
+
+  useEffect(() => {
+    function checkUserData() {
+      console.log("listen storeage change");
+      const item = localStorage.getItem("userData");
+    }
+    window.addEventListener("localStorage ", checkUserData);
+    return () => {
+      window.removeEventListener("localStorage ", checkUserData);
+    };
+  }, []);
+
+  const routerFromRole = (role) => {
+    let route = <></>;
+    switch (role) {
+      case enums.RoleUser.CUSTOMER:
+        route = (
+          <>
+            <Route path="/store" element={<Store />}></Route>
+          </>
+        );
+        break;
+      case enums.RoleUser.SALLER:
+        route = (
+          <>
+            <Route path="/store" element={<Store />}></Route>
+          </>
+        );
+        break;
+    }
+    return route;
+  };
 
   return (
     <div className="App">
-      {userState.user.token ? (
+      {userState.user._id ? (
         <Routes>
-          <Route path="*" element={<Store />} />
+          {routerFromRole(userState.user.role)}
+          <Route path="*" element={<HomeNoLogin />} />
           <Route path="notify-push" element={<NotifyPush />} />
           <Route path="profile" element={<Profile />} />
         </Routes>

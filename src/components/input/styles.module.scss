@@ -1,0 +1,62 @@
+.input {
+  width: 100%;
+  margin:1.5rem 0;
+  &__lable {
+    margin-top: 2rem;
+    font-weight: 500;
+    font-size: 1.6rem;
+    padding: 0.5em 0;
+  }
+  &__input {
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 1.2rem;
+    border: 1px solid #000;
+    border-radius: 6px;
+  }
+  &__error {
+    padding: 0.5rem 0;
+    font-size: 1.2rem;
+    color: red;
+  }
+  &_date {
+    width: 100%;
+    justify-content: space-between;
+    display: flex;
+    &__lable {
+      text-align: left;
+
+      font-weight: 500;
+      font-size: 1.6rem;
+      padding: 0.5em 0;
+      min-width: 100px;
+    }
+    &__input {
+      font-size: 1.4rem;
+      padding: 1.2rem;
+      border: 1px solid #000;
+      border-radius: 6px;
+      max-width: 100px;
+    }
+  }
+  &_area {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    &__lable {
+      text-align: left;
+      min-width: 60px;
+      margin-top: 2rem;
+      font-weight: 500;
+      font-size: 1.6rem;
+      padding: 0.5em 0;
+    }
+    textarea {
+      margin-left: 2rem;
+      height: 8rem;
+      resize: none;
+      width: 100%;
+      padding:1.2rem
+    }
+  }
+}

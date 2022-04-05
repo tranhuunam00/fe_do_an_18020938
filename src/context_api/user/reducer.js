@@ -1,17 +1,19 @@
 const initState = {
-  user: JSON.parse(localStorage.getItem("user")) || {
+  user: JSON.parse(localStorage.getItem("USER")) || {
     name: "nam",
     loading: false,
   },
 };
 
-console.log(initState);
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_USER":
       state.user = action.payload.user;
-      state.user.token = action.payload.token;
-      localStorage.setItem("user", JSON.stringify(state.user));
+      localStorage.setItem("USER", JSON.stringify(state.user));
+      return { ...state };
+    case "CHANGE_USER":
+      state.user = action.payload.user;
+      localStorage.setItem("USER", JSON.stringify(state.user));
       return { ...state };
 
     case "SHOW_LOADING":
@@ -22,7 +24,8 @@ function reducer(state, action) {
       return { ...state };
     case "REMOVE_USER":
       state.loading = false;
-      return { ...initState };
+
+      return { loading: false, user: {} };
   }
 }
 export { initState };

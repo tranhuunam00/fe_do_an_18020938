@@ -4,7 +4,7 @@ import * as apis from "../../../api/auth";
 import { Link } from "react-router-dom";
 import linkImg from "../../../assets/linkImg";
 import userProvider from "../../../context_api/user/context";
-import Input from "../../../commoms/input";
+import Input from "../../../components/input";
 import { checkError } from "../../../service/helper";
 import { GoogleLogin } from "react-google-login";
 import toastService from "../../../service/toast";
@@ -12,7 +12,6 @@ import Footer from "../../../commoms/footer/index";
 
 const Login = (props) => {
   const [user, dispatch] = useContext(userProvider);
-
   const [input, setInput] = useState({});
   const [error, setError] = useState({ email: "email", password: "password" });
 
@@ -23,8 +22,6 @@ const Login = (props) => {
     setError({ ...error, [name]: valueError });
     setInput({ ...input, [name]: valueInput });
   };
-  console.log(error);
-  console.log(!checkError(error));
 
   const handleSubmit = async (events) => {
     try {
@@ -35,6 +32,8 @@ const Login = (props) => {
 
       if (data.status == 200) {
         dispatch({ type: "ADD_USER", payload: data.data.data });
+        localStorage.setItem("TOKEN", data.data.data.token);
+        localStorage.setItem("REFRESH_TOKEN", data.data.data.refreshToken);
       }
 
       dispatch({ type: "HIDE_LOADING" });
@@ -45,9 +44,7 @@ const Login = (props) => {
     }
   };
 
-  const responseGoogle = (response) => {
-    console.log(response);
-  };
+  const responseGoogle = (response) => {};
   return (
     <div className={styles.loginForm}>
       <form method="get" action={`http://localhost:5000/api/auths/google`}>
@@ -78,7 +75,6 @@ const Login = (props) => {
             className={!checkError(error) ? "undisabled" : "disabled"}
             type="submit"
             onClick={(events) => {
-              console.log("hehe");
               !checkError(error)
                 ? handleSubmit(events)
                 : events.preventDefault();

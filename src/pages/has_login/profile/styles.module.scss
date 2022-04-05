@@ -1,10 +1,33 @@
 $leftImg: calc(50% - 10rem);
 .profile {
-  min-height: 900px;
-  &_img {
-    height: 40rem;
-    width: 100%;
+  min-height: 120rem;
+  &_cover {
+    position: relative;
+    &_img {
+      object-fit: cover;
+      height: 40rem;
+      width: 100%;
+    }
+    &_camera,
+    &_input {
+      width: 5rem;
+      height: 5rem;
+      position: absolute;
+      bottom: 5rem;
+      right: 5%;
+      // z-index: 2;
+    }
+    &_camera {
+      // z-index: 3;
+      // opacity: 0
+    }
+    &_input {
+      z-index: 3;
+      cursor: pointer;
+      opacity: 0;
+    }
   }
+
   &_content {
     margin-bottom: 5rem;
     height: 50rem;
@@ -20,14 +43,15 @@ $leftImg: calc(50% - 10rem);
       width: 100%;
       //   background-color: red;
       display: grid;
-      grid-template-rows: 3fr 1fr 1fr;
+      grid-template-rows: 4fr 1fr 1fr;
       grid-gap: 3rem;
       letter-spacing: 1.4px;
       position: relative;
       box-shadow: 0px 8px 20px rgb(0 0 0 /20%);
 
       &_name {
-        padding-top: 30%;
+        padding-top: 40%;
+        padding-bottom: 10%;
 
         h3 {
           padding: 2rem;
@@ -39,7 +63,17 @@ $leftImg: calc(50% - 10rem);
           font-weight: 350;
         }
       }
-
+      &_gender {
+        width: 100%;
+        padding-left: 4rem;
+        display: flex;
+        font-size: 14px;
+        justify-content: space-between;
+        input {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
       &_avatar {
         position: absolute;
         top: -10rem;
@@ -60,6 +94,16 @@ $leftImg: calc(50% - 10rem);
         top: 5rem;
         right: calc($leftImg + 1.2rem);
       }
+      &_avatar_input {
+        position: absolute;
+        cursor: pointer;
+        height: 2rem;
+        width: 2rem;
+        z-index: 2;
+        opacity: 0;
+        top: 5rem;
+        right: calc($leftImg + 1.2rem);
+      }
       &_edit {
         height: 2rem;
         width: 2rem;
@@ -71,8 +115,35 @@ $leftImg: calc(50% - 10rem);
       }
       &_input__name {
         display: flex;
+        justify-content: space-between;
         input {
           width: 90%;
+        }
+        &:first-child {
+          text-align: start;
+        }
+        &_last {
+          text-align: end;
+        }
+      }
+
+      &_social {
+        button {
+          width: 50%;
+          padding: 1rem;
+          border-radius: 4px;
+          border: none;
+        }
+      }
+      &_description {
+        width: 100%;
+        font-weight: 500;
+        font-size: 1.5rem;
+        &_input {
+          padding: 10px;
+          width: 100%;
+          height: 8rem;
+          resize: none;
         }
       }
     }
@@ -83,7 +154,7 @@ $leftImg: calc(50% - 10rem);
       height: 100%;
       //   background-color: green;
       display: grid;
-      grid-template-rows: 1fr 4fr;
+      grid-template-rows: 2fr 4fr;
       grid-gap: 3rem;
       padding: 0 5% 5rem 5%;
 
@@ -106,6 +177,8 @@ $leftImg: calc(50% - 10rem);
       &_img {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+        grid-template-rows: 1fr 1fr;
+
         grid-gap: 2rem;
         img {
           width: 100%;
@@ -114,4 +187,10 @@ $leftImg: calc(50% - 10rem);
       }
     }
   }
+}
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

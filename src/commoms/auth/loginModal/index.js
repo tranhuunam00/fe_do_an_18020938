@@ -28,7 +28,6 @@ const LoginModal = (props) => {
     if (data.status == 200) {
       dispatch({ type: "ADD_USER", payload: data.data.data });
     }
-    console.log(user);
   };
   return (
     <div className={`${styles.loginModal} ${display}`}>
