@@ -1,7 +1,9 @@
 import axios from "axios";
-const apiEndPoint =
-  process.env.REACT_APP_API_ENDPOIND + "/api" || "http://localhost:5003/api";
+const apiEndPoint = process.env.REACT_APP_API_ENDPOIND
+  ? process.env.REACT_APP_API_ENDPOIND + "/api"
+  : "https://tranhuunam18020938-do-an.herokuapp.com" + "/api";
 
+console.log(process.env.REACT_APP_API_ENDPOIND + "/api");
 const instance = axios.create({
   baseURL: apiEndPoint,
   timeout: 10000,

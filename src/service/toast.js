@@ -22,7 +22,7 @@ const convertMessageRegister = (status) => {
 const toastService = (data) => {
   const message = convertMessageRegister(data.data.message);
 
-  if (data.status == 200 || data.status == 201 || data.status == 203) {
+  if (data.status === 200 || data.status === 201 || data.status === 203) {
     return toast.success(message);
   }
   return toast.error(message);

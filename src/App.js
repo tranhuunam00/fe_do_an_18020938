@@ -25,7 +25,10 @@ function App() {
 
   useEffect(() => {
     if (userState.user.token) {
-      var socket = socketClient(process.env.REACT_APP_API_ENDPOIND);
+      var socket = socketClient(
+        process.env.REACT_APP_API_ENDPOIND ||
+          "https://tranhuunam18020938-do-an.herokuapp.com"
+      );
       setSocketIo(socket);
       if (socket) {
         socket.emit("login", "12345");
