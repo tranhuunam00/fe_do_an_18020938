@@ -16,34 +16,34 @@ import Notify from "./pages/no_login/notify";
 import ResetPassword from "./pages/no_login/resetPassword";
 
 import NotifyPush from "./pages/has_login/notificationPush";
-import * as contants from "./constants/constants";
+
 import Profile from "./pages/has_login/profile/index";
 import Store from "./pages/customer/store";
 function App() {
-  const [userState, dispatch] = useContext(UserContext);
-  const [socketIo, setSocketIo] = useContext(SocketContext);
+  const [userState] = useContext(UserContext);
+  const [setSocketIo] = useContext(SocketContext);
 
-  // useEffect(() => {
-  //   if (userState.user.token) {
-  //     var socket = socketClient(
-  //       process.env.REACT_APP_API_ENDPOIND ||
-  //         "https://tranhuunam18020938-do-an.herokuapp.com"
-  //     );
-  //     setSocketIo(socket);
-  //     if (socket) {
-  //       socket.emit("login", "12345");
-  //       socket.on("return", (data) => console.log(data));
-  //     }
-  //   }
-  // }, [userState.user._id]);
+  useEffect(() => {
+    if (userState.user.token) {
+      var socket = socketClient(
+        process.env.REACT_APP_API_ENDPOIND ||
+          "https://tranhuunam18020938-do-an.herokuapp.com"
+      );
+      setSocketIo(socket);
+      if (socket) {
+        socket.emit("login", "12345");
+        socket.on("return", (data) => console.log(data));
+      }
+    }
+  }, [userState.user._id]);
 
-  // useEffect(() => {
-  //   function checkUserData() {}
-  //   window.addEventListener("localStorage ", checkUserData);
-  //   return () => {
-  //     window.removeEventListener("localStorage ", checkUserData);
-  //   };
-  // }, []);
+  useEffect(() => {
+    function checkUserData() {}
+    window.addEventListener("localStorage ", checkUserData);
+    return () => {
+      window.removeEventListener("localStorage ", checkUserData);
+    };
+  }, []);
 
   const routerFromRole = (role) => {
     let route = <></>;

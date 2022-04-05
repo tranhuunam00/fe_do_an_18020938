@@ -5,13 +5,14 @@ import { useContext } from "react";
 import linkImg from "../../assets/linkImg";
 import { Link, useNavigate } from "react-router-dom";
 import * as authApi from "../../api/auth";
+import * as helper from "../../service/helper";
 // import toastService from "../../../service/toast";
 
 const Header = () => {
   const [userState, dispatch] = useContext(UserContext);
   const valueUserLocal = JSON.parse(localStorage.getItem("user"));
-  const token = localStorage.getItem("token");
-  const refreshToken = localStorage.getItem("refreshToken");
+  const token = helper.getTokenFromLocal();
+  const refreshToken = helper.getRefreshTokenFromLocal();
 
   const navigate = useNavigate();
 
