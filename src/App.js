@@ -14,36 +14,39 @@ import ForgotPassword from "./pages/no_login/forgotPasword";
 import Loading from "./commoms/loading/index";
 import Notify from "./pages/no_login/notify";
 import ResetPassword from "./pages/no_login/resetPassword";
-
 import NotifyPush from "./pages/has_login/notificationPush";
-
 import Profile from "./pages/has_login/profile/index";
 import Store from "./pages/customer/store";
+import { toast } from "react-toastify";
 function App() {
   const [userState] = useContext(UserContext);
   const [setSocketIo] = useContext(SocketContext);
 
-  // useEffect(() => {
-  //   if (userState.user.token) {
-  //     var socket = socketClient(
-  //       process.env.REACT_APP_API_ENDPOIND ||
-  //         "https://tranhuunam18020938-do-an.herokuapp.com"
-  //     );
-  //     setSocketIo(socket);
-  //     if (socket) {
-  //       socket.emit("login", "12345");
-  //       socket.on("return", (data) => console.log(data));
-  //     }
-  //   }
-  // }, [userState.user.name]);
+  useEffect(() => {
+    if (userState.user.token) {
+      var socket = socketClient(
+        process.env.REACT_APP_API_ENDPOIND ||
+          "https://tranhuunam18020938-do-an.herokuapp.com"
+      );
+      setSocketIo(socket);
+      if (socket) {
+        socket.emit("login", "12345");
+        socket.on("return", (data) => {
+          toast.info(data);
+        });
 
-  // useEffect(() => {
-  //   function checkUserData() {}
-  //   window.addEventListener("storage ", checkUserData);
-  //   return () => {
-  //     window.removeEventListener("storage ", checkUserData);
-  //   };
-  // }, []);
+        toastService;
+      }
+    }
+  }, [userState.user.firstName]);
+
+  useEffect(() => {
+    function checkUserData() {}
+    window.addEventListener("storage ", checkUserData);
+    return () => {
+      window.removeEventListener("storage ", checkUserData);
+    };
+  }, []);
 
   const routerFromRole = (role) => {
     let route = (
