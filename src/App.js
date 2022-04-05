@@ -34,8 +34,6 @@ function App() {
         socket.on("return", (data) => {
           toast.info(data);
         });
-
-        toastService;
       }
     }
   }, [userState.user.firstName]);
