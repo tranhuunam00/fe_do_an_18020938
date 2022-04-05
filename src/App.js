@@ -22,7 +22,7 @@ import Store from "./pages/customer/store";
 function App() {
   const [userState] = useContext(UserContext);
   const [setSocketIo] = useContext(SocketContext);
-
+  console.log(userState.user.name);
   // useEffect(() => {
   //   if (userState.user.token) {
   //     var socket = socketClient(
@@ -46,7 +46,11 @@ function App() {
   // }, []);
 
   const routerFromRole = (role) => {
-    let route = <></>;
+    let route = (
+      <>
+        <Route path="*" element={<HomeNoLogin />} />
+      </>
+    );
     switch (role) {
       case enums.RoleUser.CUSTOMER:
         route = (
@@ -62,6 +66,7 @@ function App() {
           </>
         );
         break;
+      default:
     }
     return route;
   };
