@@ -23,7 +23,7 @@ function App() {
   const [setSocketIo] = useContext(SocketContext);
   toast.info("connect socket");
   useEffect(() => {
-    if (userState.user.token) {
+    if (userState.user._id) {
       toast.info(process.env.REACT_APP_API_ENDPOIND);
       var socket = socketClient(
         process.env.REACT_APP_API_ENDPOIND ||
@@ -37,7 +37,7 @@ function App() {
         });
       }
     }
-  }, []);
+  }, [userState.user._id]);
 
   useEffect(() => {
     function checkUserData() {}
