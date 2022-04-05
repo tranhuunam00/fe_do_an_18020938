@@ -35,10 +35,7 @@ function App() {
   }, [userState.user._id]);
 
   useEffect(() => {
-    function checkUserData() {
-      console.log("listen storeage change");
-      const item = localStorage.getItem("userData");
-    }
+    function checkUserData() {}
     window.addEventListener("localStorage ", checkUserData);
     return () => {
       window.removeEventListener("localStorage ", checkUserData);

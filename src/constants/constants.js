@@ -2,7 +2,7 @@ export const LINK_LOGO_IMG =
   "https://www.bonsaiempire.com/images/site/footer_logo.png";
 
 export const API_ENDPOINT =
-  process.env.REACT_APP_API_ENDPOIND ||
+  process.env.REACT_APP_API_ENDPOIND + "/api" ||
   "https://tranhuunam18020938-do-an.herokuapp.com/api";
 
 export const API_ENDPOINT_GOOGLE_LOGIN =
