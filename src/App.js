@@ -30,7 +30,7 @@ function App() {
       );
       setSocketIo(socket);
       if (socket) {
-        socket.emit("login", "12345");
+        socket.emit("test", "reactJs connect");
         socket.on("return", (data) => {
           toast.info(data);
         });
