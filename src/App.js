@@ -35,15 +35,15 @@ function App() {
         socket.on("return", (data) => console.log(data));
       }
     }
-  }, [userState.user._id]);
+  }, [userState.user.name]);
 
-  // useEffect(() => {
-  //   function checkUserData() {}
-  //   window.addEventListener("storage ", checkUserData);
-  //   return () => {
-  //     window.removeEventListener("storage ", checkUserData);
-  //   };
-  // }, []);
+  useEffect(() => {
+    function checkUserData() {}
+    window.addEventListener("storage ", checkUserData);
+    return () => {
+      window.removeEventListener("storage ", checkUserData);
+    };
+  }, []);
 
   const routerFromRole = (role) => {
     let route = <></>;
