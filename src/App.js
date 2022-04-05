@@ -24,6 +24,7 @@ function App() {
   toast.info("connect socket");
   useEffect(() => {
     if (userState.user.token) {
+      toast.info(process.env.REACT_APP_API_ENDPOIND);
       var socket = socketClient(
         process.env.REACT_APP_API_ENDPOIND ||
           "https://tranhuunam18020938-do-an.herokuapp.com"
