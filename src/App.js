@@ -21,7 +21,7 @@ import { toast } from "react-toastify";
 function App() {
   const [userState] = useContext(UserContext);
   const [setSocketIo] = useContext(SocketContext);
-
+  toast.info("connect socket");
   useEffect(() => {
     if (userState.user.token) {
       var socket = socketClient(
@@ -36,7 +36,7 @@ function App() {
         });
       }
     }
-  }, [userState.user.firstName]);
+  }, []);
 
   useEffect(() => {
     function checkUserData() {}
