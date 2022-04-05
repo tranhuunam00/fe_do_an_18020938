@@ -2,7 +2,7 @@ const initState = {
   user: localStorage.getItem("USER")
     ? JSON.parse(localStorage.getItem("USER"))
     : {
-        name: "nam",
+        user: { name: "nam" },
         loading: false,
       },
 };
