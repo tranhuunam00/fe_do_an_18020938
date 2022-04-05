@@ -1,8 +1,10 @@
 const initState = {
-  user: JSON.parse(localStorage.getItem("USER")) || {
-    name: "nam",
-    loading: false,
-  },
+  user: localStorage.getItem("USER")
+    ? JSON.parse(localStorage.getItem("USER"))
+    : {
+        name: "nam",
+        loading: false,
+      },
 };
 
 function reducer(state, action) {
