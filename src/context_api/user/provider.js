@@ -11,3 +11,4 @@ function UserProvider({ children }) {
   );
 }
 export default UserProvider;
+console.log(initState);

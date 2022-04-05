@@ -3,10 +3,10 @@ const initState = {
     ? JSON.parse(localStorage.getItem("USER"))
     : {
         firstName: "nam",
-        loading: false,
       },
 };
 
+console.log(localStorage.getItem("USER"));
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_USER":

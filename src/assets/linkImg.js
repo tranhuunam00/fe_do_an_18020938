@@ -5,6 +5,7 @@ import seaImg from "./img/sea.jpg";
 import cameraSvg from "./img/camera.svg";
 import penSvg from "./img/pen.svg";
 import hotGirlVnu from "./img/hotgirlVnu.jpg";
+
 export default {
   logoImg,
   loadingGif,
