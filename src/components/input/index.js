@@ -127,10 +127,10 @@ export const InputTextArea = (props) => {
               props.minlength &&
               value.target.value.length < +props.minlength
             ) {
-              console.log("a");
               e = `${props.lable} phải dài hơn ${+props.minlength}`;
             }
             setError(e);
+            value.error = e;
             props.handleInput(value);
           }}
           rows="4"

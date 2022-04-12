@@ -1,0 +1,46 @@
+.shop {
+  width: 100%;
+  height: 100%;
+  color: var(--primary-color_text);
+  &_category {
+    box-sizing: border-box;
+    padding: 0 12rem;
+    margin: 4rem 0;
+    // background-color: red;
+    width: 100%;
+    text-align: start;
+    &_name {
+      font-size: 4.8rem;
+      margin: 10rem 0;
+      font-weight: bold;
+    }
+    &_content {
+      &_title {
+        display: flex;
+        font-size: 3.2rem;
+        font-weight: 600;
+        font-style: italic;
+        text-decoration: none;
+        &:hover {
+          opacity: 0.5;
+        }
+        a {
+          color: rgb(64, 125, 33);
+          text-decoration: none;
+        }
+        p {
+          padding-left: 1rem;
+          font-size: 2.4rem;
+        }
+      }
+      &_card {
+        padding: 10rem 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        grid-template-rows: 1fr 1fr;
+        column-gap: 2rem;
+        row-gap: 2rem;
+      }
+    }
+  }
+}

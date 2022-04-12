@@ -16,19 +16,22 @@ const handleSuccess = (response) => {
   return response;
 };
 const handleError = (error) => {
-  return error.response;
+  return Promise.reject(error);
 };
 
 instance.interceptors.response.use(handleSuccess, handleError);
 
 instance.interceptors.response.use(
   async (res) => {
-    if (res && res.config) {
-      const originalConfig = res.config;
-
-      if (originalConfig.url !== "/user/login" && res) {
-        if (res.status === 401 && !originalConfig._retry) {
+    return res;
+  },
+  async (err) => {
+    if (err && err.config) {
+      const originalConfig = err.config;
+      if (originalConfig.url !== "/users/login") {
+        if (err.response.status === 401 && !originalConfig._retry) {
           originalConfig._retry = true;
+
           try {
             const rs = await instance.post("/users/refresh-token", {
               refreshToken: localStorage.getItem("REFRESH_TOKEN"),
@@ -43,18 +46,13 @@ instance.interceptors.response.use(
 
               originalConfig.headers.Authorization = `Bearer ${token}`;
             }
-
             return instance(originalConfig);
           } catch (_error) {
-            return Promise.reject(_error);
+            return Promise.reject(err);
           }
         }
       }
     }
-
-    return res;
-  },
-  async (err) => {
     return Promise.reject(err);
   }
 );

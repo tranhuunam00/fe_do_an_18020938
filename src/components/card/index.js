@@ -23,7 +23,7 @@ const Card = (props) => {
           </p>
           <div className={styles.card_hover_content_add}>
             <p className={styles.card_hover_content_add_number}>
-              {props.number}
+              {props.amount}
             </p>
             <button className={styles.card_hover_content_add_cart}>
               Thêm vào giỏ

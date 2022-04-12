@@ -13,6 +13,7 @@ import * as constants from "../../../constants/constants";
 import toastService from "../../../service/toast";
 import "react-datepicker/dist/react-datepicker.css";
 import * as helper from "../../../service/helper";
+
 const Register = (props) => {
   const navigate = useNavigate();
 
@@ -29,8 +30,9 @@ const Register = (props) => {
     firstName: "firstName",
     lastName: "lastName",
     dob: "dob",
+    description: "description",
   });
-
+  console.log(error);
   const handleInput = (value) => {
     const name = value.target.name;
     let valueInput = value.target.value;
@@ -56,7 +58,7 @@ const Register = (props) => {
       });
 
       const data = await apis.register(formData);
-
+      toastService(data);
       dispatch({ type: "HIDE_LOADING" });
       if (data.status === constants.STATUS_CODE_CREATED) {
         const query = queryString.stringify({
@@ -67,9 +69,8 @@ const Register = (props) => {
         });
         return navigate(`/notify/?${query}`);
       }
-
-      toastService(data);
     } catch (e) {
+      toastService(e.response);
       dispatch({ type: "HIDE_LOADING" });
     }
   };

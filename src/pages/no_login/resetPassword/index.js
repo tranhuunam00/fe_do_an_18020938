@@ -10,7 +10,7 @@ import userProvider from "../../../context_api/user/context";
 import queryString from "query-string";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import * as constants from "../../../constants/constants";
-import { toast } from "react-toastify";
+import toastService from "../../../service/toast";
 
 const ResetPassword = (props) => {
   const [user, dispatch] = useContext(userProvider);
@@ -39,15 +39,14 @@ const ResetPassword = (props) => {
         token: query.get("token"),
         newPassword: input.password,
       });
-      toast.success(data.data.message);
+      toastService(data);
 
       dispatch({ type: "HIDE_LOADING" });
       if (data.status === constants.STATUS_CODE_OK) {
         return navigate(`/login`);
       }
-      toast.error(data.data.message);
     } catch (e) {
-      toast.error(e.message);
+      toastService(e.response);
       dispatch({ type: "HIDE_LOADING" });
     }
   };

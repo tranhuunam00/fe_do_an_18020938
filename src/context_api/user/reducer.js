@@ -4,6 +4,7 @@ const initState = {
     : {
         firstName: "nam",
       },
+  loading: false,
 };
 
 function reducer(state, action) {

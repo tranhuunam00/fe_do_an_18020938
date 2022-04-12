@@ -39,7 +39,7 @@ const Login = (props) => {
       dispatch({ type: "HIDE_LOADING" });
       toastService(data);
     } catch (err) {
-      toastService(err.message);
+      toastService(err.response);
       dispatch({ type: "HIDE_LOADING" });
     }
   };

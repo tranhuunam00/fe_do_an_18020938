@@ -33,7 +33,6 @@ const Profile = () => {
 
       dispatch({ type: "HIDE_LOADING" });
 
-      console.log(detailUser);
       if (detailUser.status == 200) {
         const data = detailUser.data.data;
         userState.user.lastName = data.lastName;
@@ -51,7 +50,6 @@ const Profile = () => {
 
         dispatch({ type: "CHANGE_USER", payload: userState });
       }
-      dispatch({ type: "HIDE_LOADING" });
     } catch (err) {
       dispatch({ type: "HIDE_LOADING" });
     }

@@ -6,7 +6,7 @@
   &_content {
     width: 25%;
     position: absolute;
-    top: 38rem;
+    top: 42rem;
     text-align: start;
     left: 12rem;
     &_text {
@@ -22,6 +22,7 @@
   &_description {
     width: 100%;
     p {
+      font-size: 1.8rem;
       line-height: 3rem;
     }
   }

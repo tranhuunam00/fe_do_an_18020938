@@ -10,7 +10,7 @@ import userProvider from "../../../context_api/user/context";
 import queryString from "query-string";
 import { Link, useNavigate } from "react-router-dom";
 import * as constants from "../../../constants/constants";
-import { toast } from "react-toastify";
+import toastService from "../../../service/toast";
 
 const ForgotPassword = (props) => {
   const [user, dispatch] = useContext(userProvider);
@@ -35,6 +35,7 @@ const ForgotPassword = (props) => {
       dispatch({ type: "SHOW_LOADING" });
       const data = await apis.forgotPasword(input);
       dispatch({ type: "HIDE_LOADING" });
+      toastService(data);
       if (data.status === constants.STATUS_CODE_OK) {
         const query = queryString.stringify({
           title: "Xác nhận tài khoản",
@@ -44,9 +45,8 @@ const ForgotPassword = (props) => {
         });
         return navigate(`/notify?${query}`);
       }
-      toast.error(data.data.message);
     } catch (e) {
-      toast.error(e.message);
+      toastService(e.response);
       dispatch({ type: "HIDE_LOADING" });
     }
   };

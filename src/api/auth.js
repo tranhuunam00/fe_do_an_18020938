@@ -2,7 +2,8 @@ import axiosService from "../service/axiosService";
 import { API_ENDPOINT_GOOGLE_LOGIN } from "../constants/constants";
 
 export const login = async (data) => {
-  return await axiosService.post(`/users/login`, data);
+  const user = await axiosService.post(`/users/login`, data);
+  return user;
 };
 
 export const loginGoogle = async () => {

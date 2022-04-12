@@ -1,4 +1,5 @@
 const moment = require("moment");
+const { Filter } = require("../constants/enums");
 
 export const validateEmail = (email) => {
   var re =
@@ -58,4 +59,19 @@ export const getUserFromLocal = () => {
 };
 export const getProductFromLocal = () => {
   return JSON.parse(localStorage.getItem("PRODUCT"));
+};
+
+export const convertTextFromFilter = (filter) => {
+  switch (filter) {
+    case Filter.ALL:
+      return "Tất cả";
+    case Filter.OLD_TIME:
+      return "Cũ nhất";
+    case Filter.NEW_TIME:
+      return "Mới nhất";
+    case Filter.LESS_MONEY:
+      return "Rẻ nhất";
+    case Filter.MORE_MONEY:
+      return "Đắt nhất";
+  }
 };

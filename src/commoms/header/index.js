@@ -46,7 +46,7 @@ const Header = () => {
         <a href="#">Cây đặc biệt</a>
         <a href="#">Cảm hứng</a>
         <a href="#">Diễn đàn</a>
-        <a href="#">Cửa hàng</a>
+        <Link to="/shop">Cửa hàng</Link>
         <a href="#">Khóa học</a>
       </div>
       {!userState.user._id ? (

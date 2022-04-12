@@ -17,30 +17,40 @@ import ResetPassword from "./pages/no_login/resetPassword";
 import NotifyPush from "./pages/has_login/notificationPush";
 import Profile from "./pages/has_login/profile/index";
 import Store from "./pages/customer/store";
+import Shop from "./pages/saller/shop/index";
 import { toast } from "react-toastify";
+import { selectIsLoading } from "./redux/features/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+import ShopDetail from "./pages/saller/shopDetail/index";
 function App() {
+  const isL = useSelector(selectIsLoading);
   const [userState] = useContext(UserContext);
   const [socketState, setSocketIo] = useContext(SocketContext);
-  // toast.info("connect socket");
+  console.log("render app");
   useEffect(() => {
-    if (userState.user._id) {
-      toast.info(process.env.REACT_APP_API_ENDPOIND);
-      var socket = socketClient(
-        "https://tranhuunam18020938-do-an.herokuapp.com"
-      );
+    if (userState.user.firstName) {
+      console.log("render socket");
 
-      if (socket) {
-        socket.emit("test", "reactJs connect");
-        socket.on("return", (data) => {
-          toast.info(data);
-        });
-      }
-      setSocketIo(socket);
+      var socket = socketClient(
+        process.env.REACT_APP_API_ENDPOIND ||
+          "https://tranhuunam18020938-do-an.herokuapp.com"
+      );
+      socket.on("connected", (data) => {
+        if (data === "connected") {
+          setSocketIo(socket);
+        }
+      });
+      socket.on("return", (data) => {
+        toast.info(data);
+      });
     }
     return () => {
-      socket.emit("disconnected", "out");
+      if (!!socketState) {
+        console.log("emit");
+        socketState.emit("disconnected", "out");
+      }
     };
-  }, [userState.user._id]);
+  }, [userState.user.firstName]);
 
   useEffect(() => {
     function checkUserData() {}
@@ -70,7 +80,8 @@ function App() {
       case enums.RoleUser.SALLER:
         route = (
           <>
-            <Route path="/store" element={<Store />}></Route>
+            <Route path="/shop" element={<Shop />}></Route>
+            <Route path="/shop/:type" element={<ShopDetail />}></Route>
           </>
         );
         break;
@@ -99,7 +110,7 @@ function App() {
           <Route path="*" element={<HomeNoLogin />} />
         </Routes>
       )}
-      {userState.loading ? <Loading /> : <p></p>}
+      {userState.loading || isL ? <Loading /> : <p></p>}
     </div>
   );
 }
