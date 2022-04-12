@@ -9,9 +9,8 @@ import * as helper from "../../../service/helper";
 import UserContext from "../../../context_api/user/context";
 import * as enums from "../../../constants/enums";
 import { useParams } from "react-router-dom";
-import linkImg from "../../../assets/linkImg";
 import { useState } from "react";
-
+import linkImg from "../../../assets/linkImg";
 import {
   selectCurrentProducts,
   selectIsLoading,
@@ -20,13 +19,13 @@ import {
 import { Link } from "react-router-dom";
 import { Select } from "../../../components/select/index";
 import { Filter } from "../../../constants/enums";
-
+import PaginatedItems from "../../../components/pagination/index";
 //
 //
 const listCard = (products, type) => {
   const list =
     products && products[type] ? (
-      products[type].data.map((product) => (
+      products[type].products.map((product) => (
         <Card
           key={product._id}
           name={product.name}
@@ -43,45 +42,61 @@ const listCard = (products, type) => {
 };
 
 const ShopDetail = () => {
+  const products = useSelector(selectCurrentProducts);
+
   const { type } = useParams();
   const dispatch = useDispatch();
   const token = helper.getTokenFromLocal();
   const [userState] = useContext(UserContext);
-  const [filter, setFilter] = useState({ min: 0, max: 1000000 });
-  const handleClick = (event) => {
+  const [filter, setFilter] = useState({ _minMoney: 0, _maxMoney: 1000000 });
+  const handleClick = (event, filterCurrent) => {
     const name = event.target.name;
     let value = event.target.value;
     switch (value) {
+      case Filter.OLD_TIME:
+        value = 1;
+        break;
+      case Filter.NEW_TIME:
+        value = -1;
+        break;
+      case Filter.LESS_MONEY:
+        value = +1;
+        break;
       case Filter.MORE_MONEY:
         value = -1;
         break;
-      case Filter.OLD_TIME:
-        value = -1;
-        break;
-      case Filter.NEW_TIME:
-        value = 1;
-        break;
-      case Filter.LESS_MONEY:
-        value = 1;
-        break;
     }
-    setFilter({ ...filter, [name]: +value });
+
+    setFilter({ ...filter, [name]: value });
+    if (name === "_page") {
+      const newFilter = { ...filterCurrent, [name]: value };
+
+      dispatchGetFilter(newFilter);
+    }
+  };
+  const dispatchGetFilter = (filter) => {
+    dispatch(
+      productActions.getAllProduct({
+        sallerId: userState.user.sallerId,
+        token: token,
+        query: {
+          _typeProduct: type,
+          _limit: 20,
+
+          ...filter,
+        },
+      })
+    );
+  };
+  useEffect(() => {
+    dispatchGetFilter(filter);
+  }, []);
+
+  const handleFind = () => {
+    dispatchGetFilter(filter);
   };
   console.log(filter);
-
-  useEffect(() => {
-    // dispatch(
-    //   productActions.getAllProduct({
-    //     sallerId: userState.user.sallerId,
-    //     token: token,
-    //     query: {
-    //       _typeProduct: type,
-    //       _page: 1,
-    //       _limit: 20,
-    //     },
-    //   })
-    // );
-  }, []);
+  console.log(products);
   return (
     <div className={styles.shopDetail}>
       <Banner
@@ -99,47 +114,81 @@ const ShopDetail = () => {
             Những vật phẩm của bạn đã đưa ra bán! Tồn kho còn lại
           </h3>{" "}
           <div className={styles.shopDetail_content_header_filter}>
+            <input
+              className={styles.shopDetail_content_header_filter_inputName}
+              placeholder="Tìm theo tên..."
+              name="_textSearch"
+              onChange={(e) => handleClick(e)}
+            ></input>
+            <img
+              className={styles.shopDetail_content_header_filter_search}
+              src={linkImg.searchIcon}
+              onClick={() => {
+                handleFind();
+              }}
+            ></img>
+          </div>
+          <div className={styles.shopDetail_content_header_filter}>
             <div className={styles.shopDetail_content_header_filter_money}>
               <p>Giá</p>
               <input
-                name="min"
+                name="_minMoney"
                 onChange={(e) => handleClick(e)}
                 type="number"
-                value={filter.min}
+                value={filter._minMoney}
                 className={styles.shopDetail_content_header_filter_money_min}
               ></input>
               <p>-</p>
               <input
-                name="max"
+                name="_maxMoney"
                 onChange={(e) => handleClick(e)}
                 type="number"
-                value={filter.max}
+                value={filter._maxMoney}
                 className={styles.shopDetail_content_header_filter_money_max}
               ></input>
             </div>
+
             <Select
-              name="sortMoney"
-              options={[Filter.LESS_MONEY, Filter.MORE_MONEY]}
+              name="_sortMoney"
+              options={[Filter.ALL, Filter.LESS_MONEY, Filter.MORE_MONEY]}
               title={"Giá"}
-              defaultOption={Filter.LESS_MONEY}
+              defaultOption={Filter.ALL}
               handleClick={handleClick}
             />
             <Select
-              name="sortTime"
+              name="_sortTime"
               options={[Filter.NEW_TIME, Filter.OLD_TIME]}
               title={"Thời gian"}
-              defaultOption={Filter.NEW_TIME}
+              defaultOption={Filter.OLD_TIME}
               handleClick={handleClick}
             />
           </div>
           <div className={styles.shopDetail_content_card}>
-            <Card />
-            <Card />
-            <Card />
-            <Card />
-            <Card />
+            {listCard(products, type)}
           </div>
         </div>
+      </div>
+      <div className={styles.shopDetail_footer_pagination}>
+        <PaginatedItems
+          handleClick={(e) => {
+            handleClick(e, filter);
+          }}
+          name="_page"
+          limit={
+            products[type] &&
+            products[type].pagination &&
+            products[type].pagination._limit
+              ? products[type].pagination._limit
+              : 1
+          }
+          total={
+            products[type] &&
+            products[type].pagination &&
+            products[type].pagination._total
+              ? products[type].pagination._total
+              : 1
+          }
+        />
       </div>
     </div>
   );

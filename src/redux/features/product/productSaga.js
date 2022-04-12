@@ -5,7 +5,12 @@ import * as productApi from "../../../api/product";
 function* handleGetAllProduct(action) {
   try {
     const response = yield call(productApi.getAllProduct, action.payload);
-    yield put(productActions.getAllProductSuccess(response));
+    yield put(
+      productActions.getAllProductSuccess({
+        response,
+        type: action.payload.query._typeProduct,
+      })
+    );
   } catch (error) {
     yield put(productActions.getAllProductFailed(error.response));
   }

@@ -26,7 +26,13 @@ const productSlice = createSlice({
 
     getAllProductSuccess(state, action) {
       state.isLoading = false;
-      state.currentProducts = action.payload.data.data;
+      const { type, response } = action.payload;
+      console.log(type);
+      if (type === "ALL") {
+        state.currentProducts = response.data.data;
+      } else {
+        state.currentProducts[type] = response.data.data;
+      }
     },
 
     getAllProductFailed(state, action) {

@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 const listCard = (products, type) => {
   const list =
     products && products[type] ? (
-      products[type].data.map((product) => (
+      products[type].products.map((product) => (
         <Card
           key={product._id}
           name={product.name}
@@ -40,7 +40,7 @@ const Shop = () => {
   const products = useSelector(selectCurrentProducts);
   const token = helper.getTokenFromLocal();
   const [userState] = useContext(UserContext);
-  console.log(products);
+  console.log(userState);
 
   useEffect(() => {
     dispatch(
@@ -53,7 +53,7 @@ const Shop = () => {
       })
     );
   }, []);
-
+  console.log(products);
   return (
     <div className={styles.shop}>
       <Banner

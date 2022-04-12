@@ -9,9 +9,10 @@
       &_title {
         font-size: 3rem;
         line-height: 3rem;
+        margin-bottom: 5rem;
       }
       &_filter {
-        padding-top: 10rem;
+        padding-top: 5rem;
         display: flex;
         justify-content: flex-end;
         align-self: center;
@@ -29,8 +30,21 @@
             width: 10rem;
           }
         }
+        &_search {
+          margin: 0 0rem 0 5rem;
+          width: 40px;
+          height: 40px;
+          cursor: pointer;
+        }
+        &_inputName {
+          border: none;
+          border-bottom: 1px solid #000;
+          outline: none;
+          padding: 0 1rem;
+        }
       }
     }
+
     &_card {
       padding: 6rem 0rem;
       display: grid;
@@ -39,5 +53,9 @@
       column-gap: 2rem;
       row-gap: 2rem;
     }
+  }
+  &_footer_pagination {
+    display: flex;
+    justify-content: center;
   }
 }

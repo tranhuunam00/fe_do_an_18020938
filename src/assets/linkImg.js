@@ -6,6 +6,8 @@ import cameraSvg from "./img/camera.svg";
 import penSvg from "./img/pen.svg";
 import hotGirlVnu from "./img/hotgirlVnu.jpg";
 import iconArrowDowm from "./img/iconArrowDown.png";
+import searchIcon from "./img/search.png";
+
 export default {
   logoImg,
   loadingGif,
@@ -14,5 +16,6 @@ export default {
   cameraSvg,
   penSvg,
   hotGirlVnu,
+  searchIcon,
   iconArrowDowm,
 };
