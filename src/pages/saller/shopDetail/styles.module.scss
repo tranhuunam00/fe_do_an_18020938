@@ -10,6 +10,8 @@
         font-size: 3rem;
         line-height: 3rem;
         margin-bottom: 5rem;
+        padding: 0 20rem;
+        line-height: 4rem;
       }
       &_filter {
         padding-top: 5rem;
@@ -46,7 +48,7 @@
     }
 
     &_card {
-      padding: 6rem 0rem;
+      padding: 6rem 0rem 0rem 0;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
       grid-template-rows: 1fr 1fr;
@@ -55,6 +57,7 @@
     }
   }
   &_footer_pagination {
+    padding-bottom: 10rem;
     display: flex;
     justify-content: center;
   }

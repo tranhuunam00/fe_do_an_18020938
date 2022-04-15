@@ -1,5 +1,5 @@
 import Layout from "../../../commoms/layout";
-import Banner from "../../../commoms/banner";
+import Banner, { BannerMini } from "../../../commoms/banner";
 import bannerImg from "../../../assets/img/banner4.jpg";
 import styles from "./styles.module.scss";
 import Card from "../../../components/card/index";
@@ -99,7 +99,7 @@ const ShopDetail = () => {
   console.log(products);
   return (
     <div className={styles.shopDetail}>
-      <Banner
+      <BannerMini
         bannerImg={bannerImg}
         title="Cửa hàng tiện ích "
         description="Với những món hàng ở đây bạn có thể thay đổi cách nhìn cuộc sống .Hãy chọn nào!"

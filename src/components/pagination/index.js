@@ -46,7 +46,7 @@ function PaginatedItems({ itemsPerPage = 1, handleClick, name, total, limit }) {
       onPageChange={(e) => handlePageClick(e, handleClick)}
       pageRangeDisplayed={3}
       pageCount={pageCount}
-      previousLabel="< Quay lại"
+      previousLabel="< Quay"
       renderOnZeroPageCount={null}
       breakLinkClassName={null}
       activeClassName={styles.pagination_li__active}

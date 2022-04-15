@@ -18,13 +18,15 @@ $leftImg: calc(50% - 10rem);
       // z-index: 2;
     }
     &_camera {
-      // z-index: 3;
-      // opacity: 0
+      color: var(--primary-color);
     }
     &_input {
       z-index: 3;
       cursor: pointer;
       opacity: 0;
+    }
+    &_input ~ &_camera {
+      color: red !important;
     }
   }
 
@@ -93,6 +95,7 @@ $leftImg: calc(50% - 10rem);
         width: 2rem;
         top: 5rem;
         right: calc($leftImg + 1.2rem);
+        color: var(--primary-color);
       }
       &_avatar_input {
         position: absolute;

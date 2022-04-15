@@ -1,5 +1,5 @@
 const moment = require("moment");
-const { Filter } = require("../constants/enums");
+const { Filter, TypeProduct } = require("../constants/enums");
 
 export const validateEmail = (email) => {
   var re =
@@ -34,14 +34,40 @@ export const dateToStringLocal = (time, format) => {
   return moment(time).local().format(format);
 };
 
-export const handleInput = (value, error, setError, input, setInput) => {
-  const name = value.target.name;
-  let valueInput = value.target.value;
-  const valueError = value.error;
-  if (value.target.type == "file") {
-    valueInput = input.avatar;
-    if (value.target.files[0]) {
-      valueInput = value.target.files[0];
+export const handleInput = (event, error, setError, input, setInput) => {
+  if (event.type === "DELETE") {
+    const name = event.name;
+    const arr = [...input[name]];
+
+    const newArr = arr.filter((a, index) => {
+      return index !== event.id;
+    });
+
+    setInput({ ...input, [name]: newArr });
+    return;
+  }
+  const name = event.target.name;
+  let valueInput = event.target.value;
+  const valueError = event.error;
+  if (event.target.type == "file") {
+    switch (name) {
+      case "avatar":
+        valueInput = input.avatar;
+        if (event.target.files[0]) {
+          valueInput = event.target.files[0];
+        }
+        break;
+      case "cover":
+        valueInput = input.avatar;
+        if (event.target.files[0]) {
+          valueInput = event.target.files[0];
+        }
+        break;
+      case "imgProduct":
+        const id = event.target.id;
+        const arrImg = [...input[name]];
+        arrImg[id] = event.target.files[0];
+        valueInput = arrImg;
     }
   }
   setError({ ...error, [name]: valueError });
@@ -73,5 +99,15 @@ export const convertTextFromFilter = (filter) => {
       return "Rẻ nhất";
     case Filter.MORE_MONEY:
       return "Đắt nhất";
+    case TypeProduct.COURSE:
+      return "Khóa học";
+    case TypeProduct.FERTILIZER:
+      return "Phân bón";
+    case TypeProduct.TREE_IN_DOOR:
+      return "Cây trong nhà";
+    case TypeProduct.TREE_OUT_DOOR:
+      return "Cây ngoài trời";
+    case TypeProduct.KITS:
+      return "Dụng cụ";
   }
 };

@@ -19,12 +19,12 @@ const option = (name, options, handleClick, setSelect) => {
     </p>
   ));
 };
-export const Select = ({ options, handleClick, ...props }) => {
+export const Select = ({ options, handleClick, className, ...props }) => {
   const [select, setSelect] = useState(
     convertTextFromFilter(props.defaultOption)
   );
   return (
-    <div className={styles.filter}>
+    <div className={`${styles.filter} ${className}`}>
       <div className={styles.filter_head}>
         <span className={styles.filter_head_title}>{props.title}</span>
         <div className={styles.filter_head_body}>

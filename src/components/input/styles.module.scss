@@ -1,6 +1,6 @@
 .input {
   width: 100%;
-  margin:1.5rem 0;
+  margin: 1.5rem 0;
   &__lable {
     margin-top: 2rem;
     font-weight: 500;
@@ -56,7 +56,101 @@
       height: 8rem;
       resize: none;
       width: 100%;
-      padding:1.2rem
+      padding: 1.2rem;
+    }
+  }
+}
+.avatar {
+  padding-bottom: 1rem;
+  // background-color: red;
+  position: relative;
+  &_camera {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    top: 13.5rem;
+    left: 14.5rem;
+  }
+  &_show {
+    height: 18rem;
+    width: 18rem;
+    border-radius: 18rem;
+    object-fit: cover;
+    box-shadow: 0px 8px 20px rgb(0 0 0 /20%);
+  }
+  input {
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    z-index: 3;
+    top: 13.5rem;
+    left: 14.5rem;
+    opacity: 0;
+    // background-image: url("https://uet.vnu.edu.vn/wp-content/uploads/2022/03/z3244394758526-f668c15956104086af08091332cde298-3210.jpg");
+  }
+}
+
+.cardImg {
+  border: 1px solid #000;
+  height: 15rem;
+  width: 100%;
+  max-width: 13rem;
+
+  position: relative;
+  input {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    left: 0;
+    z-index: 3;
+  }
+  input:hover ~ &_camera svg {
+    color: rgb(9, 236, 28);
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+  &_camera {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    // background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    svg {
+      color: var(--primary-color);
+      width: 4rem;
+      height: 4rem;
+      // &:hover {
+      //   color: var(--primary-color);
+      //   width: 3.5rem;
+      //   height: 3.5rem;
+      // }
+    }
+  }
+  &_show {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    z-index: 1;
+    object-fit: cover;
+  }
+  &_delete {
+    position: absolute;
+    top: 0;
+    width: 2rem;
+    height: 2rem;
+    right: 0;
+    z-index: 4;
+    &:hover {
+      color: rgb(197, 30, 30);
     }
   }
 }

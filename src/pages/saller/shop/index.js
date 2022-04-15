@@ -14,7 +14,8 @@ import {
   productActions,
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
-
+import linkImg from "../../../assets/linkImg";
+import { BiMessageSquareAdd } from "react-icons/bi";
 //
 //
 const listCard = (products, type) => {
@@ -65,7 +66,12 @@ const Shop = () => {
       
       */}
       <div className={styles.shop_category}>
-        <p className={styles.shop_category_name}>Cây cối và dụng cụ</p>
+        <div className={styles.row}>
+          <p className={styles.shop_category_name}>Cây cối và dụng cụ</p>
+          <Link to="add-product">
+            <BiMessageSquareAdd className={styles.shop_category_add} />
+          </Link>
+        </div>
         <div className={styles.shop_category_content}>
           <div className={styles.shop_category_content_title}>
             <Link to={enums.TypeProduct.TREE_IN_DOOR}>Trong nhà</Link>

@@ -1,0 +1,55 @@
+.addP {
+  padding-bottom: 10rem;
+  &_title {
+    width: 100%;
+    font-size: 3rem;
+    line-height: 3rem;
+    margin: 5rem;
+  }
+  &_body {
+    padding: 0 12rem;
+    min-height: 500px;
+    display: flex;
+
+    &_info {
+      flex: 2;
+      padding-right: 5rem;
+      width: 100%;
+      height: 100%;
+      // background-color: green;
+      &__price {
+        width: 13.5rem;
+        margin-left: 3rem;
+      }
+      &__amount {
+        width: 10rem;
+        margin-left: 3rem;
+      }
+      &__type {
+        margin: 5rem 0;
+        width: 100%;
+      }
+      button {
+        margin-top: 3rem;
+        width: 30%;
+        height: 40px;
+        border: none;
+        border-radius: 4px;
+      }
+    }
+
+    &_arrImg {
+      flex: 1;
+      padding: 5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(12rem, 12rem));
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  // align-items: center;
+}

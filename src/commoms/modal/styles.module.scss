@@ -1,0 +1,17 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.4);
+  &_content {
+    position: absolute;
+    min-width: 50rem;
+    min-height: 50rem;
+    background-color: #fff;
+    top: calc(50% - 22rem);
+    left: calc(50% - 25rem);
+  }
+}

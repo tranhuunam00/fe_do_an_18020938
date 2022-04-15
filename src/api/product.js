@@ -16,3 +16,8 @@ export const getAllProductByType = async (filter) => {
     filter.token
   );
 };
+
+export const createProduct = async (data) => {
+  const token = localStorage.getItem("TOKEN");
+  return await axiosService.postFormData(`/products`, data, token);
+};

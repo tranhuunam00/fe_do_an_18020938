@@ -9,7 +9,7 @@ import * as helper from "../../../service/helper";
 import { updateUser } from "../../../api/auth";
 import { getProfileCustomer } from "../../../api/customer";
 import { getProfileSaller } from "../../../api/saller";
-
+import { BsPencilSquare, BsFillCameraFill } from "react-icons/bs";
 const Profile = () => {
   const [edit, setEdit] = useState(false);
   const [input, setInput] = useState({ firstName: "", lastName: "" });
@@ -98,11 +98,7 @@ const Profile = () => {
           }
         ></img>
         {edit ? (
-          <img
-            className={styles.profile_cover_camera}
-            src={linkImg.cameraSvg}
-            onClick={() => {}}
-          ></img>
+          <BsFillCameraFill className={styles.profile_cover_camera} />
         ) : (
           <p></p>
         )}
@@ -238,11 +234,9 @@ const Profile = () => {
               }
             ></img>
             {edit ? (
-              <img
+              <BsFillCameraFill
                 className={styles.profile_content_info_camera}
-                src={linkImg.cameraSvg}
-                onClick={() => {}}
-              ></img>
+              />
             ) : (
               <p></p>
             )}
@@ -259,13 +253,14 @@ const Profile = () => {
             ) : (
               <p></p>
             )}
-            <img
+
+            <BsPencilSquare
               className={styles.profile_content_info_edit}
-              src={linkImg.penSvg}
               onClick={() => {
                 setEdit(!edit);
               }}
-            ></img>
+              style={edit ? { color: "blue" } : {}}
+            />
           </div>
         </div>
         <div className={styles.profile_content_photo}>

@@ -22,6 +22,9 @@ import { toast } from "react-toastify";
 import { selectIsLoading } from "./redux/features/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ShopDetail from "./pages/saller/shopDetail/index";
+import Modal from "./commoms/modal/index";
+import AddProduct from "./pages/saller/addProduct/index";
+
 function App() {
   const isL = useSelector(selectIsLoading);
   const [userState] = useContext(UserContext);
@@ -82,6 +85,7 @@ function App() {
           <>
             <Route path="/shop" element={<Shop />}></Route>
             <Route path="/shop/:type" element={<ShopDetail />}></Route>
+            <Route path="/shop/add-product" element={<AddProduct />}></Route>
           </>
         );
         break;
@@ -111,6 +115,7 @@ function App() {
         </Routes>
       )}
       {userState.loading || isL ? <Loading /> : <p></p>}
+      {/* {true ? <Modal /> : <p></p>} */}
     </div>
   );
 }

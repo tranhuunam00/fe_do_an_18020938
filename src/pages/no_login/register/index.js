@@ -4,7 +4,11 @@ import * as apis from "../../../api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import linkImg from "../../../assets/linkImg";
 import { checkError } from "../../../service/helper";
-import Input, { InputDate, InputTextArea } from "../../../components/input";
+import Input, {
+  InputDate,
+  InputTextArea,
+  InputImg,
+} from "../../../components/input";
 import userProvider from "../../../context_api/user/context";
 import Footer from "../../../commoms/footer/index";
 import "react-toastify/dist/ReactToastify.css";
@@ -32,13 +36,13 @@ const Register = (props) => {
     dob: "dob",
     description: "description",
   });
-  console.log(error);
+
   const handleInput = (value) => {
     const name = value.target.name;
     let valueInput = value.target.value;
     const valueError = value.error;
     if (value.target.type == "file") {
-      valueInput = input.avatar;
+      valueInput = input[name];
       if (value.target.files[0]) {
         valueInput = value.target.files[0];
       }
@@ -46,7 +50,7 @@ const Register = (props) => {
     setError({ ...error, [name]: valueError });
     setInput({ ...input, [name]: valueInput });
   };
-
+  console.log(input);
   const handleSubmit = async (events) => {
     try {
       events.preventDefault();
@@ -85,27 +89,7 @@ const Register = (props) => {
             <img src={linkImg.logoImg}></img>
           </div>
           <div className={styles.row}>
-            <div className={styles.registerForm_content_avatar}>
-              <input
-                type="file"
-                name="avatar"
-                title=" "
-                accept="image/png, image/jpeg"
-                onChange={(event) => handleInput(event)}
-              ></input>
-              <img
-                className={styles.registerForm_content_avatar_camera}
-                src={linkImg.cameraSvg}
-              ></img>
-              <img
-                className={styles.registerForm_content_avatar_show}
-                src={
-                  input.avatar
-                    ? URL.createObjectURL(input.avatar)
-                    : linkImg.hotGirlVnu
-                }
-              ></img>
-            </div>{" "}
+            <InputImg handleInput={handleInput} name="avatar" />
             <div className={styles.column}>
               <InputDate
                 lable="Ngày sinh"

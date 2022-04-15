@@ -9,6 +9,7 @@ const initialState = {
   detailProducts: {},
   pagination: {},
   filter: {},
+  reset: false,
 };
 
 const productSlice = createSlice({
@@ -36,6 +37,18 @@ const productSlice = createSlice({
     },
 
     getAllProductFailed(state, action) {
+      state.isLoading = false;
+    },
+
+    createProduct(state, action) {
+      state.isLoading = true;
+    },
+
+    createProductSuccess(state, action) {
+      state.isLoading = false;
+    },
+
+    createProductFailed(state, action) {
       state.isLoading = false;
     },
   },

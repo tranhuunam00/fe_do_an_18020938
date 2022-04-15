@@ -3,7 +3,9 @@ import { useState, useEffect } from "react";
 import { validateEmail } from "../../service/helper";
 import DatePicker from "react-datepicker";
 import * as helper from "../../service/helper";
-
+import linkImg from "../../assets/linkImg";
+import { BiAddToQueue } from "react-icons/bi";
+import { AiFillDelete } from "react-icons/ai";
 const ErrorText = ({ textError }) => {
   return textError ? (
     <p className={styles.input__error}>{textError}</p>
@@ -19,6 +21,7 @@ const Input = ({
   placeholder,
   handleInput,
   value,
+  className,
   ...props
 }) => {
   const [error, setError] = useState(null);
@@ -27,7 +30,7 @@ const Input = ({
       setError(`Mật khẩu nhập lại không chính xác !`);
   }, [props.password]);
   return (
-    <div className={styles.input} style={props.style}>
+    <div className={`${styles.input} ${className}`} style={props.style}>
       <p className={styles.input__lable}>{lable}</p>
       <input
         value={value}
@@ -141,4 +144,67 @@ export const InputTextArea = (props) => {
     </div>
   );
 };
+
+export const InputImg = ({ handleInput, name }) => {
+  const [input, setInput] = useState({});
+  console.log(input);
+  return (
+    <div className={styles.avatar}>
+      <input
+        type="file"
+        name={name}
+        title=" "
+        accept="image/png, image/jpeg"
+        onChange={(event) => {
+          if (event.target.files[0]) {
+            setInput({ [name]: event.target.files[0] });
+            handleInput(event);
+          }
+        }}
+      ></input>
+
+      <img className={styles.avatar_camera} src={linkImg.cameraSvg}></img>
+      <img
+        className={styles.avatar_show}
+        src={
+          input[name] ? URL.createObjectURL(input[name]) : linkImg.hotGirlVnu
+        }
+      ></img>
+    </div>
+  );
+};
+
+export const CardImgInput = ({ name, handleInput, img, id }) => {
+  return (
+    <div className={styles.cardImg}>
+      <input
+        id={id}
+        type="file"
+        name={name}
+        title=" "
+        accept="image/png, image/jpeg"
+        onChange={(event) => {
+          if (event.target.files[0]) {
+            handleInput(event);
+          }
+        }}
+      ></input>
+      <div className={styles.cardImg_camera}>
+        <BiAddToQueue />
+      </div>
+
+      <img
+        className={styles.cardImg_show}
+        src={img && URL.createObjectURL(img)}
+      ></img>
+      {img && (
+        <AiFillDelete
+          onClick={() => handleInput({ type: "DELETE", id, name })}
+          className={styles.cardImg_delete}
+        />
+      )}
+    </div>
+  );
+};
+
 export default Input;
