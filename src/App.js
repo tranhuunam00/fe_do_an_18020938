@@ -19,14 +19,16 @@ import Profile from "./pages/has_login/profile/index";
 import Store from "./pages/customer/store";
 import Shop from "./pages/saller/shop/index";
 import { toast } from "react-toastify";
-import { selectIsLoading } from "./redux/features/product/productSlice";
+import { selectIsLoadingProduct } from "./redux/features/product/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import ShopDetail from "./pages/saller/shopDetail/index";
 import Modal from "./commoms/modal/index";
 import AddProduct from "./pages/saller/addProduct/index";
+import { selectorShowModal } from "./redux/features/modal/modalSlice";
 
 function App() {
-  const isL = useSelector(selectIsLoading);
+  const isS = useSelector(selectorShowModal);
+  const isL = useSelector(selectIsLoadingProduct);
   const [userState] = useContext(UserContext);
   const [socketState, setSocketIo] = useContext(SocketContext);
   console.log("render app");
@@ -86,6 +88,10 @@ function App() {
             <Route path="/shop" element={<Shop />}></Route>
             <Route path="/shop/:type" element={<ShopDetail />}></Route>
             <Route path="/shop/add-product" element={<AddProduct />}></Route>
+            <Route
+              path="/shop/product/update/:_productId"
+              element={<AddProduct />}
+            ></Route>
           </>
         );
         break;
@@ -115,7 +121,7 @@ function App() {
         </Routes>
       )}
       {userState.loading || isL ? <Loading /> : <p></p>}
-      {/* {true ? <Modal /> : <p></p>} */}
+      {isS ? <Modal /> : <p></p>}
     </div>
   );
 }

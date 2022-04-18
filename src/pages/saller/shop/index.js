@@ -16,33 +16,37 @@ import {
 import { Link } from "react-router-dom";
 import linkImg from "../../../assets/linkImg";
 import { BiMessageSquareAdd } from "react-icons/bi";
+import { modalActions } from "../../../redux/features/modal/modalSlice";
+import * as constants from "../../../constants/constants";
 //
 //
-const listCard = (products, type) => {
-  const list =
-    products && products[type] ? (
-      products[type].products.map((product) => (
-        <Card
-          key={product._id}
-          name={product.name}
-          description={product.description}
-          imgUrl={product.imgUrl[0] ? product.imgUrl[0] : null}
-          amount={product.amount}
-          price={product.price}
-        />
-      ))
-    ) : (
-      <p></p>
-    );
-  return list;
-};
+
 const Shop = () => {
   const dispatch = useDispatch();
   const products = useSelector(selectCurrentProducts);
   const token = helper.getTokenFromLocal();
   const [userState] = useContext(UserContext);
-  console.log(userState);
 
+  const listCard = (products, type) => {
+    const list =
+      products && products[type] ? (
+        products[type].products.map((product) => (
+          <Card
+            _id={product._id}
+            key={product._id}
+            name={product.name}
+            description={product.description}
+            imgUrl={product.imgUrl[0] ? product.imgUrl[0] : null}
+            amount={product.amount}
+            price={product.price}
+            handleClick={() => {}}
+          />
+        ))
+      ) : (
+        <p></p>
+      );
+    return list;
+  };
   useEffect(() => {
     dispatch(
       productActions.getAllProduct({

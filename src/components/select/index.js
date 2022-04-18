@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import linkImg from "../../assets/linkImg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { convertTextFromFilter } from "../../service/helper";
 const option = (name, options, handleClick, setSelect) => {
   return options.map((option) => (
@@ -20,9 +20,13 @@ const option = (name, options, handleClick, setSelect) => {
   ));
 };
 export const Select = ({ options, handleClick, className, ...props }) => {
-  const [select, setSelect] = useState(
-    convertTextFromFilter(props.defaultOption)
-  );
+  const [select, setSelect] = useState("Tất cả");
+  useEffect(() => {
+    console.log(props.defaultOption);
+    const content = convertTextFromFilter(props.defaultOption?.toString());
+    console.log(content);
+    setSelect(content);
+  }, [props.defaultOption]);
   return (
     <div className={`${styles.filter} ${className}`}>
       <div className={styles.filter_head}>

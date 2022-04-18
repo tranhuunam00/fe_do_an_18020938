@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+const initialState = {
+  show: false,
+  component: null,
+  valueState: {},
+  functionHandle: null,
+};
 const modalSlice = createSlice({
   name: "modal",
-  initialState: {
-    show: false,
-    component: null,
-  },
+  initialState: initialState,
   reducers: {
     showModal(state) {
       state.show = true;
@@ -13,8 +15,13 @@ const modalSlice = createSlice({
     hideModal(state) {
       state.show = false;
     },
-    changeComponent(state, action) {
-      state.component = action.payload;
+    changeModal(state, action) {
+      state.component = action.payload.component;
+      state.valueState = action.payload.valueState;
+      state.functionHandle = action.payload.functionHandle;
+    },
+    resetState(state, action) {
+      state = initialState;
     },
   },
 });
@@ -22,5 +29,10 @@ const modalSlice = createSlice({
 export const modalActions = modalSlice.actions;
 
 export const selectorModal = (state) => state.modal;
+export const selectorShowModal = (state) => state.modal.show;
+
+export const selectorModalValue = (state) => state.modal.valueState;
+export const selectorModalFunction = (state) => state.modal.functionHandle;
+export const selectorModalComponent = (state) => state.modal.component;
 
 export default modalSlice.reducer;

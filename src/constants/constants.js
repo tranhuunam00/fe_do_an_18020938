@@ -13,3 +13,7 @@ export const STATUS_CODE_OK = 200;
 export const STATUS_CODE_NOT_FOUND = 404;
 
 export const STATUS_CODE_BAD_REQUEST = 400;
+
+export const NameComponentModal = {
+  DETAIL_PRODUCT: "DETAIL_PRODUCT",
+};

@@ -1,4 +1,6 @@
 const moment = require("moment");
+const { useEffect } = require("react");
+
 const { Filter, TypeProduct } = require("../constants/enums");
 
 export const validateEmail = (email) => {
@@ -111,3 +113,24 @@ export const convertTextFromFilter = (filter) => {
       return "Dụng cụ";
   }
 };
+
+export function useOutside(ref, setOpen) {
+  useEffect(() => {
+    /**
+     * Alert if clicked on outside of element
+     */
+    function handleClickOutside(event) {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setOpen(false);
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [ref, setOpen]);
+}

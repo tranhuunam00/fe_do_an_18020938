@@ -27,6 +27,10 @@ const listCard = (products, type) => {
     products && products[type] ? (
       products[type].products.map((product) => (
         <Card
+          handleClick={() => {
+            console.log("detail");
+          }}
+          _id={product._id}
           key={product._id}
           name={product.name}
           description={product.description}
@@ -48,7 +52,7 @@ const ShopDetail = () => {
   const dispatch = useDispatch();
   const token = helper.getTokenFromLocal();
   const [userState] = useContext(UserContext);
-  const [filter, setFilter] = useState({ _minMoney: 0, _maxMoney: 1000000 });
+  const [filter, setFilter] = useState({ _minMoney: 0, _maxMoney: 100000000 });
   const handleClick = (event, filterCurrent) => {
     const name = event.target.name;
     let value = event.target.value;

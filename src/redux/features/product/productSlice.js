@@ -51,6 +51,32 @@ const productSlice = createSlice({
     createProductFailed(state, action) {
       state.isLoading = false;
     },
+
+    getDetailProduct(state, action) {
+      state.isLoading = true;
+    },
+
+    getDetailProductSuccess(state, action) {
+      state.isLoading = false;
+      state.detailProducts = action.payload.data.data;
+    },
+
+    getDetailProductFailed(state, action) {
+      state.isLoading = false;
+    },
+
+    updateProduct(state, action) {
+      state.isLoading = true;
+    },
+
+    updateProductSuccess(state, action) {
+      state.isLoading = false;
+      state.detailProducts = action.payload.data.data;
+    },
+
+    updateProductFailed(state, action) {
+      state.isLoading = false;
+    },
   },
 });
 
@@ -58,7 +84,7 @@ export const productActions = productSlice.actions;
 
 export const selectCurrentProducts = (state) => state.products.currentProducts;
 export const selectDetailProducts = (state) => state.products.detailProducts;
-export const selectIsLoading = (state) => state.products.isLoading;
+export const selectIsLoadingProduct = (state) => state.products.isLoading;
 
 const productReducer = productSlice.reducer;
 export default productReducer;

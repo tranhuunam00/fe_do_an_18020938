@@ -195,7 +195,7 @@ export const CardImgInput = ({ name, handleInput, img, id }) => {
 
       <img
         className={styles.cardImg_show}
-        src={img && URL.createObjectURL(img)}
+        src={typeof img !== "string" && img ? URL.createObjectURL(img) : img}
       ></img>
       {img && (
         <AiFillDelete
