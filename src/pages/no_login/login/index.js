@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import * as apis from "../../../api/auth";
 import { Link } from "react-router-dom";
 import linkImg from "../../../assets/linkImg";
@@ -9,12 +9,17 @@ import { checkError } from "../../../service/helper";
 import { GoogleLogin } from "react-google-login";
 import toastService from "../../../service/toast";
 import Footer from "../../../commoms/footer/index";
-
+import { useParams } from "react-router-dom";
 const Login = (props) => {
   const [user, dispatch] = useContext(userProvider);
   const [input, setInput] = useState({});
   const [error, setError] = useState({ email: "email", password: "password" });
-
+  const { status } = useParams();
+  useEffect(() => {
+    if (status) {
+      toastService({ status: 200, data: { message: "CONFIRM_SUCCESS" } });
+    }
+  }, [status]);
   const handleInput = (value) => {
     const name = value.target.name;
     const valueInput = value.target.value;

@@ -99,39 +99,59 @@
           }
         }
       }
-      &__add {
-        margin: 5rem 0 2rem 0;
-        display: flex;
 
-        &_number {
-          width: 40px;
-          height: 40px;
-          background-color: rgba(209, 71, 12, 0.8);
-          text-align: center;
-          line-height: 40px;
-          font-weight: bold;
-          font-size: 16px;
-        }
-        &_cart {
-          cursor: pointer;
-          border: none;
-          background-color: var(--primary-color);
-          width: 30%;
-
-          &:hover {
-            opacity: 0.7;
-          }
-        }
-      }
       &__buy {
+        display: flex;
+        justify-content: space-between;
         &_btn {
           border: none;
-          width: calc(30% + 40px);
+          width: 40%;
           height: 4rem;
           background-color: rgb(246, 57, 57);
 
           &:hover {
             opacity: 0.7;
+          }
+        }
+        &__add {
+          width: 50%;
+          display: flex;
+
+          &_number {
+            width: 4rem;
+            height: 4rem;
+            background-color: rgba(209, 71, 12, 0.8);
+            text-align: center;
+            line-height: 4rem;
+            font-weight: bold;
+            font-size: 16px;
+          }
+          &_cart {
+            cursor: pointer;
+            border: none;
+            background-color: var(--primary-color);
+            width: calc(100% - 4rem);
+
+            &:hover {
+              opacity: 0.7;
+            }
+          }
+        }
+      }
+      &__update {
+        padding: 3rem 0 0 0;
+        height: 4rem;
+        // background-color: rgb(83, 75, 117);
+        a {
+          padding: 1rem;
+          font-size: 16px;
+          font-weight: 500;
+          text-decoration: none;
+          background-color: rgb(172, 197, 238);
+          border-radius: 4px;
+
+          &:hover {
+            opacity: 0.4;
           }
         }
       }

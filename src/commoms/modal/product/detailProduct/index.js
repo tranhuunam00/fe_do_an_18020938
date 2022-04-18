@@ -95,18 +95,22 @@ const DetailProductModal = () => {
               Xem tất cả đánh giá (40)
             </p>
           </div>
-          <div className={styles.detailP_body_info__add}>
-            <p className={styles.detailP_body_info__add_number}>5 </p>
-            <button className={styles.detailP_body_info__add_cart}>
-              Thêm vào giỏ
-            </button>
-          </div>
+
           <div className={styles.detailP_body_info__buy}>
+            <div className={styles.detailP_body_info__buy__add}>
+              <p className={styles.detailP_body_info__buy__add_number}>5 </p>
+              <button className={styles.detailP_body_info__buy__add_cart}>
+                Thêm vào giỏ
+              </button>
+            </div>
+
             <button className={styles.detailP_body_info__buy_btn}>
               Mua ngay
             </button>
-
+          </div>
+          <div className={styles.detailP_body_info__update}>
             <Link
+              className={styles.detailP_body_info__update_link}
               to={`/shop/product/update/${currentProduct._id}`}
               onClick={() => {
                 dispatch(modalActions.hideModal());

@@ -113,6 +113,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomeNoLogin />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/login/:status" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/notify" element={<Notify />} />{" "}

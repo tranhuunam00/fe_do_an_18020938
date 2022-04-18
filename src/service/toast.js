@@ -13,6 +13,8 @@ const convertMessageRegister = (status) => {
       return (message = "Người dùng không tồn tại");
     case "USER_ALREADY_EXIST":
       return (message = "Người dùng đã tồn tại");
+    case "CONFIRM_SUCCESS":
+      return (message = "Xác thực tài khoản thành công");
     default:
       message = "lỗi";
   }

@@ -64,7 +64,13 @@ const AddProduct = () => {
       }
       input.imgProduct = [];
       pro.imgProduct = input.imgProduct.concat(pro.imgUrl || []);
-
+      setError({
+        description: null,
+        name: null,
+        amount: null,
+        price: null,
+        type: null,
+      });
       setInput(pro);
     }
   }, [currentProduct]);
@@ -100,14 +106,13 @@ const AddProduct = () => {
     });
 
     formData.append("imgUrl", data.imgUrl);
-    
+    console.log(...formData);
     dispatch(
       productActions.updateProduct({
         productId: _productId,
         data: formData,
       })
     );
-
   };
   //
   useEffect(() => {

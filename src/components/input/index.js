@@ -192,11 +192,13 @@ export const CardImgInput = ({ name, handleInput, img, id }) => {
       <div className={styles.cardImg_camera}>
         <BiAddToQueue />
       </div>
+      {img && (
+        <img
+          className={styles.cardImg_show}
+          src={typeof img !== "string" && img ? URL.createObjectURL(img) : img}
+        ></img>
+      )}
 
-      <img
-        className={styles.cardImg_show}
-        src={typeof img !== "string" && img ? URL.createObjectURL(img) : img}
-      ></img>
       {img && (
         <AiFillDelete
           onClick={() => handleInput({ type: "DELETE", id, name })}
