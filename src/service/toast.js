@@ -15,6 +15,8 @@ const convertMessageRegister = (status) => {
       return (message = "Người dùng đã tồn tại");
     case "CONFIRM_SUCCESS":
       return (message = "Xác thực tài khoản thành công");
+    case "CART_EXISTED":
+      return (message = "Sản phẩm đã có trong giỏ hàng");
     default:
       message = "lỗi";
   }

@@ -9,6 +9,11 @@ export const getAllProductBySallerId = async (filter) => {
   );
 };
 
+export const getAllProducts = async (filter) => {
+  const query = queryString.stringify(filter.query);
+  return await axiosService.get(`/products?${query}`, filter.token);
+};
+
 export const getAllProductByType = async (filter) => {
   const query = queryString.stringify(filter.query);
   return await axiosService.get(

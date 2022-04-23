@@ -16,6 +16,10 @@ const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
+    updateFilterProduct(state, action) {
+      state.filter = action.payload;
+    },
+
     getAllProduct(state, action) {
       state.isLoading = true;
       state.status = {
@@ -85,6 +89,7 @@ export const productActions = productSlice.actions;
 export const selectCurrentProducts = (state) => state.products.currentProducts;
 export const selectDetailProducts = (state) => state.products.detailProducts;
 export const selectIsLoadingProduct = (state) => state.products.isLoading;
+export const selectFilterProduct = (state) => state.products.filter;
 
 const productReducer = productSlice.reducer;
 export default productReducer;

@@ -111,6 +111,8 @@ const AddProduct = () => {
       productActions.updateProduct({
         productId: _productId,
         data: formData,
+        navigate: navigate(`/shop/${currentProduct.type}`),
+        filter: { _textSearch: input.name },
       })
     );
   };

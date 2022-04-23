@@ -13,7 +13,7 @@ import { useState } from "react";
 import linkImg from "../../../assets/linkImg";
 import {
   selectCurrentProducts,
-  selectIsLoading,
+  selectFilterProduct,
   productActions,
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
@@ -27,9 +27,7 @@ const listCard = (products, type) => {
     products && products[type] ? (
       products[type].products.map((product) => (
         <Card
-          handleClick={() => {
-            console.log("detail");
-          }}
+          sallerId={product.saller}
           _id={product._id}
           key={product._id}
           name={product.name}
@@ -47,7 +45,7 @@ const listCard = (products, type) => {
 
 const ShopDetail = () => {
   const products = useSelector(selectCurrentProducts);
-
+  const filterRedux = useSelector(selectFilterProduct);
   const { type } = useParams();
   const dispatch = useDispatch();
   const token = helper.getTokenFromLocal();
@@ -93,14 +91,26 @@ const ShopDetail = () => {
     );
   };
   useEffect(() => {
-    dispatchGetFilter(filter);
+    return function cleanup() {
+      console.log("unmount");
+      dispatch(productActions.updateFilterProduct({}));
+    };
   }, []);
 
   const handleFind = () => {
     dispatchGetFilter(filter);
   };
-  console.log(filter);
-  console.log(products);
+
+  useEffect(() => {
+    console.log(filterRedux);
+    if (Object.keys(filterRedux).length > 0) {
+      dispatchGetFilter(filterRedux);
+      setFilter(filterRedux);
+    } else {
+      dispatchGetFilter(filter);
+    }
+  }, [filterRedux]);
+
   return (
     <div className={styles.shopDetail}>
       <BannerMini
@@ -122,6 +132,7 @@ const ShopDetail = () => {
               className={styles.shopDetail_content_header_filter_inputName}
               placeholder="Tìm theo tên..."
               name="_textSearch"
+              value={filter._textSearch || ""}
               onChange={(e) => handleClick(e)}
             ></input>
             <img
@@ -139,7 +150,7 @@ const ShopDetail = () => {
                 name="_minMoney"
                 onChange={(e) => handleClick(e)}
                 type="number"
-                value={filter._minMoney}
+                value={filter._minMoney || 0}
                 className={styles.shopDetail_content_header_filter_money_min}
               ></input>
               <p>-</p>
@@ -147,7 +158,7 @@ const ShopDetail = () => {
                 name="_maxMoney"
                 onChange={(e) => handleClick(e)}
                 type="number"
-                value={filter._maxMoney}
+                value={filter._maxMoney || 100000000}
                 className={styles.shopDetail_content_header_filter_money_max}
               ></input>
             </div>

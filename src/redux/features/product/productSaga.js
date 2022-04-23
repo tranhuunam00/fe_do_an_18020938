@@ -5,10 +5,12 @@ import toastService from "../../../service/toast";
 
 function* handleGetAllProduct(action) {
   try {
-    const response = yield call(
-      productApi.getAllProductBySallerId,
-      action.payload
-    );
+    let response;
+    if (action.sallerId) {
+      response = yield call(productApi.getAllProductBySallerId, action.payload);
+    } else {
+      response = yield call(productApi.getAllProducts, action.payload);
+    }
 
     yield put(
       productActions.getAllProductSuccess({
@@ -50,12 +52,14 @@ function* handleGetDetailProduct(action) {
 
 function* handleUpdateProduct(action) {
   try {
-    console.log(action);
     const response = yield call(productApi.updateProduct, {
       productId: action.payload.productId,
       data: action.payload.data,
     });
+
     yield put(productActions.updateProductSuccess(response));
+    yield put(productActions.updateFilterProduct(action.payload.filter));
+    action.payload.navigate();
   } catch (error) {
     yield put(productActions.updateProductFailed(error.response));
   }

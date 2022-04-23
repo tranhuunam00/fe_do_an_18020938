@@ -1,6 +1,7 @@
 import styles from "./styles.module.scss";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   modalActions,
   selectorShowModal,
@@ -12,20 +13,36 @@ import {
   selectDetailProducts,
 } from "../../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
+import UserContext from "../../../../context_api/user/context";
+import { cartActions } from "../../../../redux/features/cart/cartSlice";
 
 const DetailProductModal = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isShowModal = useSelector(selectorShowModal);
   const modalValue = useSelector(selectorModalValue);
   const currentProduct = useSelector(selectDetailProducts);
   const [productState, setProductState] = useState(currentProduct);
   const formDetailProductModal = useRef();
+  const [User] = useContext(UserContext);
+
   const handleCloseModal = () => {
     setTimeout(() => {
       dispatch(modalActions.hideModal());
       dispatch(modalActions.resetState());
     }, 200);
   };
+
+  const handleCreateCart = () => {
+    dispatch(
+      cartActions.createCart({
+        product: currentProduct._id,
+        amount: 1,
+        navigate: navigate,
+      })
+    );
+  };
+
   useOutside(formDetailProductModal, handleCloseModal);
 
   useEffect(() => {
@@ -34,8 +51,8 @@ const DetailProductModal = () => {
     );
   }, []);
   const nthImgUrl =
-    currentProduct.imgUrl && currentProduct.imgUrl.length > 1
-      ? [...currentProduct.imgUrl]
+    currentProduct?.imgUrl && currentProduct?.imgUrl.length > 1
+      ? [...currentProduct?.imgUrl]
       : [];
   if (nthImgUrl.length > 0) {
     nthImgUrl.shift();
@@ -49,7 +66,7 @@ const DetailProductModal = () => {
           <img
             className={styles.detailP_body_arrImg__1st}
             src={
-              currentProduct.imgUrl && currentProduct.imgUrl.length > 0
+              currentProduct?.imgUrl && currentProduct?.imgUrl.length > 0
                 ? currentProduct.imgUrl[0]
                 : "http://media.doisongphapluat.com/711/2021/3/5/hot-girl-chung-khoan-ngo-huyen-thuong-dspl-5.jpg"
             }
@@ -69,19 +86,19 @@ const DetailProductModal = () => {
         <div className={styles.detailP_body_info}>
           <div className={styles.detailP_body_info__head}>
             <p className={styles.detailP_body_info__head_name}>
-              {currentProduct.name || ""}
+              {currentProduct?.name || ""}
             </p>
-            <p>Giá: {currentProduct.price}Đ</p>
+            <p>Giá: {currentProduct?.price || 0}Đ</p>
           </div>
 
           <div className={styles.detailP_body_info__desc}>
             <h4>Mô tả</h4>
-            <p>{currentProduct.description}</p>
+            <p>{currentProduct?.description}</p>
           </div>
           <div className={styles.detailP_body_info__owner}>
             <p>
-              Người bán :{currentProduct.saller?.firstName || ""}{" "}
-              {currentProduct.saller?.lastName || ""}
+              Người bán :{currentProduct?.saller?.firstName || ""}{" "}
+              {currentProduct?.saller?.lastName || ""}
             </p>
             <p>4 năm</p>
           </div>
@@ -96,29 +113,44 @@ const DetailProductModal = () => {
             </p>
           </div>
 
-          <div className={styles.detailP_body_info__buy}>
-            <div className={styles.detailP_body_info__buy__add}>
-              <p className={styles.detailP_body_info__buy__add_number}>5 </p>
-              <button className={styles.detailP_body_info__buy__add_cart}>
-                Thêm vào giỏ
+          {User.user?.sallerId === currentProduct?.saller?._id ? (
+            <div className={styles.detailP_body_info__amount}>
+              <p>Số lượng: {currentProduct?.amount}</p>
+            </div>
+          ) : (
+            <div className={styles.detailP_body_info__buy}>
+              <div className={styles.detailP_body_info__buy__add}>
+                <p className={styles.detailP_body_info__buy__add_number}>5 </p>
+                <button
+                  className={styles.detailP_body_info__buy__add_cart}
+                  onClick={() => {
+                    handleCreateCart();
+                  }}
+                >
+                  Thêm vào giỏ
+                </button>
+              </div>
+
+              <button className={styles.detailP_body_info__buy_btn}>
+                Mua ngay
               </button>
             </div>
-
-            <button className={styles.detailP_body_info__buy_btn}>
-              Mua ngay
-            </button>
-          </div>
-          <div className={styles.detailP_body_info__update}>
-            <Link
-              className={styles.detailP_body_info__update_link}
-              to={`/shop/product/update/${currentProduct._id}`}
-              onClick={() => {
-                dispatch(modalActions.hideModal());
-              }}
-            >
-              Chỉnh sửa
-            </Link>
-          </div>
+          )}
+          {User.user?.sallerId === currentProduct?.saller?._id ? (
+            <div className={styles.detailP_body_info__update}>
+              <Link
+                className={styles.detailP_body_info__update_link}
+                to={`/shop/product/update/${currentProduct?._id}`}
+                onClick={() => {
+                  dispatch(modalActions.hideModal());
+                }}
+              >
+                Chỉnh sửa
+              </Link>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
     </div>

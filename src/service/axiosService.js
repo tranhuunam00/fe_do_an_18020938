@@ -80,6 +80,14 @@ const postFormData = (url, body, token) => {
   });
 };
 
+const put = (url, body, token) => {
+  return instance.put(url, body, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 const putFormData = (url, body, token) => {
   return instance.put(url, body, {
     headers: {
@@ -104,6 +112,7 @@ export default {
   handleSuccess,
   handleError,
   get,
+  put,
   post,
   postFormData,
   putFormData,

@@ -72,12 +72,19 @@
       &_price {
         font-size: 1.4rem;
         text-decoration: underline;
-        padding-bottom: 1rem;
+        padding-bottom: 0.4rem;
       }
       &_description {
         letter-spacing: 0.4px;
         font-size: 1.2rem;
-        padding-bottom: 1rem;
+        padding-bottom: 0.5rem;
+      }
+      &_amount {
+        padding-bottom: 0.5rem;
+        p {
+          font-size: 1.6rem;
+          font-weight: 500;
+        }
       }
       &_add {
         display: flex;

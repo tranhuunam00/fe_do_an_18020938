@@ -2,7 +2,7 @@ $is-view: false;
 .header {
   // margin: 0 5rem;
   padding: 0 5%;
-  max-width: 1440px;
+  // max-width: 1440px;
   height: 7rem;
   background-color: #fff;
   display: flex;
@@ -92,6 +92,26 @@ $is-view: false;
         border-radius: 4px;
         // background-color: var(--primary-color);
         color: var(--primary-color);
+      }
+      &__cart {
+        position: relative;
+        &_svg {
+          width: 7rem;
+          height: 7rem;
+        }
+
+        &_amount {
+          position: absolute;
+          bottom: 1.5rem;
+          right: 4rem;
+          color: red;
+          width: 1.8rem;
+          font-size: 1.8rem;
+          height: 1.8rem;
+          border-radius: 1.8rem;
+          font-weight: 500;
+          background-color: green;
+        }
       }
     }
     &_button {

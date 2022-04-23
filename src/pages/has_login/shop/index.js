@@ -1,5 +1,5 @@
 import Layout from "../../../commoms/layout";
-import Banner from "../../../commoms/banner";
+import Banner, { BannerMini } from "../../../commoms/banner";
 import bannerImg from "../../../assets/img/banner4.jpg";
 import styles from "./styles.module.scss";
 import Card from "../../../components/card/index";
@@ -14,10 +14,9 @@ import {
   productActions,
 } from "../../../redux/features/product/productSlice";
 import { Link } from "react-router-dom";
-import linkImg from "../../../assets/linkImg";
+
 import { BiMessageSquareAdd } from "react-icons/bi";
-import { modalActions } from "../../../redux/features/modal/modalSlice";
-import * as constants from "../../../constants/constants";
+
 //
 //
 
@@ -34,6 +33,7 @@ const Shop = () => {
           <Card
             _id={product._id}
             key={product._id}
+            sallerId={product.saller}
             name={product.name}
             description={product.description}
             imgUrl={product.imgUrl[0] ? product.imgUrl[0] : null}
@@ -48,20 +48,32 @@ const Shop = () => {
     return list;
   };
   useEffect(() => {
-    dispatch(
-      productActions.getAllProduct({
-        sallerId: userState.user.sallerId,
-        token: token,
-        query: {
-          _typeProduct: "ALL",
-        },
-      })
-    );
+    if (userState.user.sallerId) {
+      dispatch(
+        productActions.getAllProduct({
+          sallerId: userState.user.sallerId,
+          token: token,
+          query: {
+            _typeProduct: "ALL",
+          },
+        })
+      );
+    } else {
+      dispatch(
+        productActions.getAllProduct({
+          sallerId: userState.user.sallerId,
+          token: token,
+          query: {
+            _typeProduct: "ALL",
+          },
+        })
+      );
+    }
   }, []);
   console.log(products);
   return (
     <div className={styles.shop}>
-      <Banner
+      <BannerMini
         bannerImg={bannerImg}
         title="Cửa hàng tiện ích "
         description="Với những món hàng ở đây bạn có thể thay đổi cách nhìn cuộc sống .Hãy chọn nào!"

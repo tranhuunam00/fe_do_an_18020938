@@ -1,0 +1,12 @@
+.cart {
+  min-height: 90rem;
+
+  &_body {
+    margin: 12rem;
+    &_head {
+    }
+    &_content {
+      margin: 10rem 0;
+    }
+  }
+}

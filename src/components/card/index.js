@@ -3,8 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { modalActions } from "../../redux/features/modal/modalSlice";
 import * as constants from "../../constants/constants";
+import UserContext from "./../../context_api/user/context";
+import { useContext } from "react";
+import { memo } from "react";
 const Card = (product) => {
   const dispatch = useDispatch();
+  const [User] = useContext(UserContext);
 
   return (
     <div
@@ -38,14 +42,20 @@ const Card = (product) => {
           <p className={styles.card_hover_content_description}>
             {product.description}
           </p>
-          <div className={styles.card_hover_content_add}>
-            <p className={styles.card_hover_content_add_number}>
-              {product.amount}
-            </p>
-            <button className={styles.card_hover_content_add_cart}>
-              Thêm vào giỏ
-            </button>
-          </div>
+          {User.user.sallerId === product?.sallerId ? (
+            <div className={styles.card_hover_content_amount}>
+              <p>Số lượng :{product.amount}</p>
+            </div>
+          ) : (
+            <div className={styles.card_hover_content_add}>
+              <p className={styles.card_hover_content_add_number}>
+                {product?.amount}
+              </p>
+              <button className={styles.card_hover_content_add_cart}>
+                Thêm vào giỏ
+              </button>
+            </div>
+          )}
         </div>
       </div>
       {/* 
@@ -54,4 +64,4 @@ const Card = (product) => {
     </div>
   );
 };
-export default Card;
+export default memo(Card);

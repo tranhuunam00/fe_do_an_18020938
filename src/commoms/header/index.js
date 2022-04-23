@@ -6,6 +6,7 @@ import linkImg from "../../assets/linkImg";
 import { Link, useNavigate } from "react-router-dom";
 import * as authApi from "../../api/auth";
 import * as helper from "../../service/helper";
+import { TiShoppingCart } from "react-icons/ti";
 // import toastService from "../../../service/toast";
 
 const Header = () => {
@@ -64,9 +65,11 @@ const Header = () => {
             Hi {userState.user.lastName}!
           </button>
           <div className={styles.header_auth_list}>
-            <Link to="cart">
-              <img src={linkImg.cartSvg}></img>
+            <Link to="/cart" className={styles.header_auth_list__cart}>
+              <TiShoppingCart className={styles.header_auth_list__cart_svg} />
+              <div className={styles.header_auth_list__cart_amount}>6</div>
             </Link>
+
             <Link to="/profile">Trang cá nhân</Link>
             <Link to="/cart">Khóa học</Link>
             <button

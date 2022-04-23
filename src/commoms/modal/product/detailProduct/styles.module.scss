@@ -127,15 +127,25 @@
             font-size: 16px;
           }
           &_cart {
+            font-size: 12px;
             cursor: pointer;
             border: none;
+            color: #000;
+            line-height: 4rem;
             background-color: var(--primary-color);
-            width: calc(100% - 4rem);
+            padding: 0 2rem;
+            text-decoration: none;
 
             &:hover {
               opacity: 0.7;
             }
           }
+        }
+      }
+      &__amount {
+        p {
+          font-size: 16px;
+          font-weight: 500;
         }
       }
       &__update {

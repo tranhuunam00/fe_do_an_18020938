@@ -7,7 +7,8 @@ import UserContext from "./context_api/user/context";
 import SocketContext from "./context_api/socketIo/context";
 import * as enums from "./constants/enums";
 import React, { useContext, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+
 import Register from "./pages/no_login/register";
 import Login from "./pages/no_login/login";
 import ForgotPassword from "./pages/no_login/forgotPasword";
@@ -17,16 +18,29 @@ import ResetPassword from "./pages/no_login/resetPassword";
 import NotifyPush from "./pages/has_login/notificationPush";
 import Profile from "./pages/has_login/profile/index";
 import Store from "./pages/customer/store";
-import Shop from "./pages/saller/shop/index";
-import { toast } from "react-toastify";
-import { selectIsLoadingProduct } from "./redux/features/product/productSlice";
-import { useDispatch, useSelector } from "react-redux";
-import ShopDetail from "./pages/saller/shopDetail/index";
+import Shop from "./pages/has_login/shop/index";
+import ShopDetail from "./pages/has_login/shopDetail/index";
 import Modal from "./commoms/modal/index";
 import AddProduct from "./pages/saller/addProduct/index";
-import { selectorShowModal } from "./redux/features/modal/modalSlice";
+import Cart from "./pages/customer/cart/index";
 
+import { selectorShowModal } from "./redux/features/modal/modalSlice";
+import { selectIsLoadingProduct } from "./redux/features/product/productSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { toast } from "react-toastify";
+import ReactGA from "react-ga";
+
+const usePageView = () => {
+  const location = useLocation();
+  console.log(location);
+  useEffect(() => {
+    ReactGA.initialize("UA-000000-01");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, [location]);
+};
 function App() {
+  usePageView();
   const isS = useSelector(selectorShowModal);
   const isL = useSelector(selectIsLoadingProduct);
   const [userState] = useContext(UserContext);
@@ -78,7 +92,8 @@ function App() {
       case enums.RoleUser.CUSTOMER:
         route = (
           <>
-            <Route path="/store" element={<Store />}></Route>
+            <Route path="/shop" element={<Shop />}></Route>
+            <Route path="/cart" element={<Cart />}></Route>
           </>
         );
         break;

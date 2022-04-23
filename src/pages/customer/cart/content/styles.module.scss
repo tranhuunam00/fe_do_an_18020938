@@ -1,0 +1,66 @@
+.flex2 {
+  display: flex;
+  flex: 2;
+  justify-content: flex-start;
+  align-items: center;
+}
+.flex1 {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.contentCard {
+  border: 1px solid #ccc;
+  width: 100%;
+  height: 16rem;
+  // background-color: red;
+  display: flex;
+  font-size: 20px;
+  line-height: 20px;
+  border: 1px solid #ccc;
+
+  &_img {
+    margin-left: 8rem;
+    margin-right: 2rem;
+    width: 13rem;
+    height: 13rem;
+    object-fit: cover;
+  }
+  &_amount {
+    display: flex;
+    justify-content: center;
+    &_decrease,
+    &_increase {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 4rem;
+      height: 4rem;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
+        background-color: var(--primary-color);
+      }
+    }
+    &_text {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 5rem;
+      height: 4rem;
+      border: 1px solid #ccc;
+    }
+  }
+  &_delete {
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: italic;
+    color: red;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
