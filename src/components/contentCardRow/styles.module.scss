@@ -3,6 +3,7 @@
   flex: 2;
   justify-content: flex-start;
   align-items: center;
+  margin-left: 8rem;
 }
 .flex1 {
   display: flex;
@@ -20,9 +21,13 @@
   font-size: 20px;
   line-height: 20px;
   border: 1px solid #ccc;
-
+  &_check {
+    margin-right: 2rem;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid #ccc;
+  }
   &_img {
-    margin-left: 8rem;
     margin-right: 2rem;
     width: 13rem;
     height: 13rem;

@@ -70,7 +70,7 @@ const Shop = () => {
       );
     }
   }, []);
-  console.log(products);
+
   return (
     <div className={styles.shop}>
       <BannerMini

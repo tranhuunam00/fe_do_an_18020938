@@ -32,7 +32,7 @@ const productSlice = createSlice({
     getAllProductSuccess(state, action) {
       state.isLoading = false;
       const { type, response } = action.payload;
-      console.log(type);
+
       if (type === "ALL") {
         state.currentProducts = response.data.data;
       } else {

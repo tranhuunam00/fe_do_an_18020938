@@ -5,7 +5,8 @@ const initialState = {
   isLoading: false,
   currentCart: [],
   detailCart: {},
-
+  deleteCart: null,
+  buyCarts: [],
   reset: false,
 };
 
@@ -15,6 +16,10 @@ const cartSlice = createSlice({
   reducers: {
     updateFilterCart(state, action) {
       state.filter = action.payload;
+    },
+
+    updateBuyCart(state, action) {
+      state.buyCarts = action.payload;
     },
 
     createCart(state, action) {
@@ -61,7 +66,8 @@ const cartSlice = createSlice({
 
     deleteCartSuccess(state, action) {
       state.isLoading = false;
-      state.currentCart = action.payload;
+      state.currentCart = action.payload.newCurrentCarts;
+      state.deleteCart = action.payload.deleteCart;
     },
 
     deleteCartFailed(state, action) {
@@ -74,6 +80,8 @@ export const cartActions = cartSlice.actions;
 
 export const selectCurrentCarts = (state) => state.carts.currentCart;
 export const selectDetailCart = (state) => state.carts.detailCart;
+export const selectDeleteCart = (state) => state.carts.deleteCart;
+export const selectBuyCarts = (state) => state.carts.buyCarts;
 export const selectIsLoadingCart = (state) => state.carts.isLoading;
 
 const cartReducer = cartSlice.reducer;

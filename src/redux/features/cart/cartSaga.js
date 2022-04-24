@@ -7,10 +7,9 @@ import toastService from "../../../service/toast";
 
 function* handleCreateCart(action) {
   try {
-    console.log("handleCreateCart");
     const { product, amount } = action.payload;
     const response = yield call(customerApi.createCart, { product, amount });
-    console.log("A");
+
     yield put(cartActions.createCartSuccess({}));
     yield put(modalActions.hideModal({}));
     if (response) {
@@ -33,7 +32,6 @@ function* handleGetCart(action) {
 
 function* handleUpdateCart(action) {
   try {
-    console.log("hihi");
     const { _idCart, product, amount, newCurrentCarts } = action.payload;
     const response = yield call(customerApi.updateCart, {
       _idCart,
@@ -48,13 +46,13 @@ function* handleUpdateCart(action) {
 
 function* deleteUpdateCart(action) {
   try {
-    console.log("hihi");
-
-    const { _idCart, newCurrentCarts } = action.payload;
+    const { _idCart, newCurrentCarts, newSelectCarts } = action.payload;
     const response = yield call(customerApi.deleteCart, {
       _idCart,
     });
-    yield put(cartActions.deleteCartSuccess(newCurrentCarts));
+    yield put(
+      cartActions.deleteCartSuccess({ newCurrentCarts, deleteCart: _idCart })
+    );
   } catch (error) {
     yield put(cartActions.deleteCartFailed(error.response));
   }

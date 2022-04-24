@@ -22,9 +22,8 @@ const option = (name, options, handleClick, setSelect) => {
 export const Select = ({ options, handleClick, className, ...props }) => {
   const [select, setSelect] = useState("Tất cả");
   useEffect(() => {
-    console.log(props.defaultOption);
     const content = convertTextFromFilter(props.defaultOption?.toString());
-    console.log(content);
+
     setSelect(content);
   }, [props.defaultOption]);
   return (

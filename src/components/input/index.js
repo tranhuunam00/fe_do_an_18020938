@@ -31,7 +31,7 @@ const Input = ({
   }, [props.password]);
   return (
     <div className={`${styles.input} ${className}`} style={props.style}>
-      <p className={styles.input__lable}>{lable}</p>
+      <div className={styles.input__lable}>{lable}</div>
       <input
         value={value}
         name={name}
@@ -48,7 +48,12 @@ const Input = ({
 
           if (props.minLength && value.target.value.length < props.minLength)
             e = `Bạn phải nhập ${lable} nhiều hơn ${props.minLength} kí tự !`;
-
+          if (
+            type == "number" &&
+            name == "phoneNumber" &&
+            !helper.validatePhoneNumber(value.target.value)
+          )
+            e = `Bạn đã nhập sai ${lable} !`;
           value.error = e;
 
           setError(e);
@@ -121,6 +126,7 @@ export const InputTextArea = (props) => {
       <div className={styles.input_area}>
         <p className={styles.input_area__lable}>{props.lable}</p>
         <textarea
+          placeholder={props.placeholder}
           name={props.name}
           value={props.value}
           onChange={(value) => {
@@ -131,6 +137,10 @@ export const InputTextArea = (props) => {
               value.target.value.length < +props.minlength
             ) {
               e = `${props.lable} phải dài hơn ${+props.minlength}`;
+            }
+
+            if (props.required && value.target.value.length < 1) {
+              e = `Bạn chưa nhập ${props.lable} `;
             }
             setError(e);
             value.error = e;
@@ -147,7 +157,7 @@ export const InputTextArea = (props) => {
 
 export const InputImg = ({ handleInput, name }) => {
   const [input, setInput] = useState({});
-  console.log(input);
+
   return (
     <div className={styles.avatar}>
       <input

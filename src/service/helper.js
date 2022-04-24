@@ -8,6 +8,11 @@ export const validateEmail = (email) => {
     /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
 };
+
+export const validatePhoneNumber = (phoneNumber) => {
+  var re = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+  return re.test(phoneNumber);
+};
 export const checkError = (error) => {
   for (let value in error) {
     if (error[value]) return true;

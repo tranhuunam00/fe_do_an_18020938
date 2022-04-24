@@ -50,7 +50,7 @@ const Register = (props) => {
     setError({ ...error, [name]: valueError });
     setInput({ ...input, [name]: valueInput });
   };
-  console.log(input);
+
   const handleSubmit = async (events) => {
     try {
       events.preventDefault();

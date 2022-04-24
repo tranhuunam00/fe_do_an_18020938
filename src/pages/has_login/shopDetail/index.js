@@ -92,7 +92,6 @@ const ShopDetail = () => {
   };
   useEffect(() => {
     return function cleanup() {
-      console.log("unmount");
       dispatch(productActions.updateFilterProduct({}));
     };
   }, []);
@@ -102,7 +101,6 @@ const ShopDetail = () => {
   };
 
   useEffect(() => {
-    console.log(filterRedux);
     if (Object.keys(filterRedux).length > 0) {
       dispatchGetFilter(filterRedux);
       setFilter(filterRedux);

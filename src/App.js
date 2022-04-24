@@ -23,6 +23,7 @@ import ShopDetail from "./pages/has_login/shopDetail/index";
 import Modal from "./commoms/modal/index";
 import AddProduct from "./pages/saller/addProduct/index";
 import Cart from "./pages/customer/cart/index";
+import PaymentSreen from "./pages/customer/payment/index";
 
 import { selectorShowModal } from "./redux/features/modal/modalSlice";
 import { selectIsLoadingProduct } from "./redux/features/product/productSlice";
@@ -33,7 +34,7 @@ import ReactGA from "react-ga";
 
 const usePageView = () => {
   const location = useLocation();
-  console.log(location);
+
   useEffect(() => {
     ReactGA.initialize("UA-000000-01");
     ReactGA.pageview(window.location.pathname + window.location.search);
@@ -45,11 +46,9 @@ function App() {
   const isL = useSelector(selectIsLoadingProduct);
   const [userState] = useContext(UserContext);
   const [socketState, setSocketIo] = useContext(SocketContext);
-  console.log("render app");
+
   useEffect(() => {
     if (userState.user.firstName) {
-      console.log("render socket");
-
       var socket = socketClient(
         process.env.REACT_APP_API_ENDPOIND ||
           "https://tranhuunam18020938-do-an.herokuapp.com"
@@ -65,7 +64,6 @@ function App() {
     }
     return () => {
       if (!!socketState) {
-        console.log("emit");
         socketState.emit("disconnected", "out");
       }
     };
@@ -94,6 +92,7 @@ function App() {
           <>
             <Route path="/shop" element={<Shop />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/payment" element={<PaymentSreen />}></Route>
           </>
         );
         break;

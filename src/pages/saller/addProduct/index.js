@@ -106,7 +106,7 @@ const AddProduct = () => {
     });
 
     formData.append("imgUrl", data.imgUrl);
-    console.log(...formData);
+
     dispatch(
       productActions.updateProduct({
         productId: _productId,
