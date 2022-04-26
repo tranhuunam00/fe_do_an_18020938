@@ -12,23 +12,22 @@ const Notify = () => {
 
   return (
     <div className={`${styles.successForm}`}>
-      <form>
-        <div className={styles.successForm_content}>
-          <div className={styles.successForm_content__header}>
-            <h1 className={styles.successForm_content__header__text}>
-              {titleMes}
-            </h1>
-            <img src={linkImg.logoImg}></img>
-          </div>
+      <div className={styles.successForm_content}>
+        <div className={styles.successForm_content__header}>
+          <h1 className={styles.successForm_content__header__text}>
+            {titleMes}
+          </h1>
+          <img src={linkImg.logoImg}></img>
+        </div>
 
-          <div className={styles.successForm_content__link}>
-            <p>{message}</p>
-            <div className={styles.successForm_content__link__to}>
-              <Link to={`${link}` || `/`}>{textButton}</Link>
-            </div>
+        <div className={styles.successForm_content__link}>
+          <p>{message}</p>
+          <div className={styles.successForm_content__link__to}>
+            <Link to={`${link}` || `/`}>{textButton}</Link>
           </div>
         </div>
-      </form>
+      </div>
+
       <Footer />
     </div>
   );

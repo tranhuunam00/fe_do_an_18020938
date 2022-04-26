@@ -50,7 +50,7 @@ const Input = ({
             e = `Bạn phải nhập ${lable} nhiều hơn ${props.minLength} kí tự !`;
           if (
             type == "number" &&
-            name == "phoneNumber" &&
+            name == "phoneReceiver" &&
             !helper.validatePhoneNumber(value.target.value)
           )
             e = `Bạn đã nhập sai ${lable} !`;

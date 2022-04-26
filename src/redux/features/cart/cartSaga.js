@@ -40,6 +40,7 @@ function* handleUpdateCart(action) {
     });
     yield put(cartActions.updateCartSuccess(newCurrentCarts));
   } catch (error) {
+    toastService(error.response);
     yield put(cartActions.updateCartFailed(error.response));
   }
 }

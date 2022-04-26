@@ -5,7 +5,7 @@ const apiEndPoint = process.env.REACT_APP_API_ENDPOIND
 
 const instance = axios.create({
   baseURL: apiEndPoint,
-  timeout: 20000,
+  timeout: 40000,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",

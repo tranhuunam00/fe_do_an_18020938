@@ -122,6 +122,7 @@ function App() {
           <Route path="*" element={<HomeNoLogin />} />
           <Route path="notify-push" element={<NotifyPush />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="/notify" element={<Notify />} />{" "}
         </Routes>
       ) : (
         <Routes>

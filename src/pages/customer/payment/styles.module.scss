@@ -72,6 +72,7 @@
 }
 .paymentMethod {
   margin: 5rem 0;
+
   &_header {
     position: relative;
     display: flex;
@@ -89,9 +90,11 @@
       border: none !important;
     }
     &_momo {
+      cursor: pointer;
       background-color: #a50064;
     }
     &_direct {
+      cursor: pointer;
       background-color: var(--primary-color);
     }
     &:after {
@@ -145,4 +148,18 @@
 
 .changeAddress {
   color: #000;
+}
+.addressSave {
+  div {
+    font-size: 20px;
+    margin: 2rem 0;
+    text-align: start;
+    display: flex;
+    span {
+      width: 20rem;
+    }
+    p {
+      font-weight: 500;
+    }
+  }
 }

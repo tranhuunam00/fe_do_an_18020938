@@ -120,7 +120,9 @@ const DetailProductModal = () => {
           ) : (
             <div className={styles.detailP_body_info__buy}>
               <div className={styles.detailP_body_info__buy__add}>
-                <p className={styles.detailP_body_info__buy__add_number}>5 </p>
+                <p className={styles.detailP_body_info__buy__add_number}>
+                  {currentProduct?.amount}{" "}
+                </p>
                 <button
                   className={styles.detailP_body_info__buy__add_cart}
                   onClick={() => {
