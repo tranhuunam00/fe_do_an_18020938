@@ -184,6 +184,7 @@ const AddProduct = () => {
                 handleInput(e, error, setError, input, setInput)
               }
               minLength={1}
+              minNumber={0}
             />
           </div>
           <div className={styles.row}>
@@ -214,6 +215,7 @@ const AddProduct = () => {
               }
               value={input.amount ? input.amount : ""}
               minLength={1}
+              minNumber={0}
             />
           </div>
 

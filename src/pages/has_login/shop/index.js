@@ -84,9 +84,11 @@ const Shop = () => {
       <div className={styles.shop_category}>
         <div className={styles.row}>
           <p className={styles.shop_category_name}>Cây cối và dụng cụ</p>
-          <Link to="add-product">
-            <BiMessageSquareAdd className={styles.shop_category_add} />
-          </Link>
+          {userState.user.role === enums.RoleUser.SALLER && (
+            <Link to="add-product">
+              <BiMessageSquareAdd className={styles.shop_category_add} />
+            </Link>
+          )}
         </div>
         <div className={styles.shop_category_content}>
           <div className={styles.shop_category_content_title}>

@@ -24,9 +24,13 @@ import Modal from "./commoms/modal/index";
 import AddProduct from "./pages/saller/addProduct/index";
 import Cart from "./pages/customer/cart/index";
 import PaymentSreen from "./pages/customer/payment/index";
+import ConfirmOrder from "./pages/has_login/confirmOrder/index";
+import Dialog from "./commoms/dialog";
 
 import { selectorShowModal } from "./redux/features/modal/modalSlice";
 import { selectIsLoadingProduct } from "./redux/features/product/productSlice";
+import { selectIsLoadingOrder } from "./redux/features/order/orderSlice";
+import { selectorShowDialog } from "./redux/features/dialog/dialogSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { toast } from "react-toastify";
@@ -42,8 +46,12 @@ const usePageView = () => {
 };
 function App() {
   usePageView();
-  const isS = useSelector(selectorShowModal);
-  const isL = useSelector(selectIsLoadingProduct);
+  const isShowModal = useSelector(selectorShowModal);
+  const isShowDialog = useSelector(selectorShowDialog);
+
+  const isLProduct = useSelector(selectIsLoadingProduct);
+  const isLOrder = useSelector(selectIsLoadingOrder);
+
   const [userState] = useContext(UserContext);
   const [socketState, setSocketIo] = useContext(SocketContext);
 
@@ -92,6 +100,7 @@ function App() {
           <>
             <Route path="/shop" element={<Shop />}></Route>
             <Route path="/cart" element={<Cart />}></Route>
+            <Route path="/order" element={<ConfirmOrder />}></Route>
             <Route path="/payment" element={<PaymentSreen />}></Route>
           </>
         );
@@ -102,6 +111,8 @@ function App() {
             <Route path="/shop" element={<Shop />}></Route>
             <Route path="/shop/:type" element={<ShopDetail />}></Route>
             <Route path="/shop/add-product" element={<AddProduct />}></Route>
+            <Route path="/confirm-order" element={<ConfirmOrder />}></Route>
+
             <Route
               path="/shop/product/update/:_productId"
               element={<AddProduct />}
@@ -136,8 +147,9 @@ function App() {
           <Route path="*" element={<HomeNoLogin />} />
         </Routes>
       )}
-      {userState.loading || isL ? <Loading /> : <p></p>}
-      {isS ? <Modal /> : <p></p>}
+      {userState.loading || isLProduct || isLOrder ? <Loading /> : <p></p>}
+      {isShowModal ? <Modal /> : <p></p>}
+      {isShowDialog ? <Dialog /> : <p></p>}
     </div>
   );
 }

@@ -1,0 +1,26 @@
+.content {
+  min-height: 600px;
+  padding: 12rem;
+  &_header {
+    margin-bottom: 10rem;
+  }
+  &_filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 5rem;
+    button {
+      margin-left: 5rem;
+      width: 10rem;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+  &_pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

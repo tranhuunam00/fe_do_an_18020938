@@ -9,6 +9,7 @@ import iconArrowDowm from "./img/iconArrowDown.png";
 import searchIcon from "./img/search.png";
 import addSvg from "./img/add.svg";
 import bannerImg from "./img/banner4.jpg";
+import defaultImg from "./img/defaultImg.png";
 export default {
   logoImg,
   loadingGif,
@@ -21,4 +22,5 @@ export default {
   iconArrowDowm,
   addSvg,
   bannerImg,
+  defaultImg,
 };

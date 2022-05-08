@@ -29,6 +29,7 @@ const Input = ({
     if (name == "rePassword" && value != props.password)
       setError(`Mật khẩu nhập lại không chính xác !`);
   }, [props.password]);
+  console.log(props.minNumber);
   return (
     <div className={`${styles.input} ${className}`} style={props.style}>
       <div className={styles.input__lable}>{lable}</div>
@@ -40,6 +41,9 @@ const Input = ({
         placeholder={placeholder}
         onChange={(value) => {
           let e = null;
+          if (type === "number" && value.target.value < +props.minNumber) {
+            e = `${lable} phải lớn hơn ${props.minNumber}`;
+          }
           if (type == "email" && !validateEmail(value.target.value)) {
             e = "Trường này phải là email";
           }

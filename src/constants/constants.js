@@ -16,4 +16,9 @@ export const STATUS_CODE_BAD_REQUEST = 400;
 
 export const NameComponentModal = {
   DETAIL_PRODUCT: "DETAIL_PRODUCT",
+  CONFIRM_ORDER: "CONFIRM_ORDER",
+};
+export const NameDialogModal = {
+  RESPONSE_DIALOG: "RESPONSE_DIALOG",
+  CHOOSE_DIALOG: "CHOOSE_DIALOG",
 };

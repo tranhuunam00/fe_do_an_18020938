@@ -21,6 +21,8 @@ const convertMessageRegister = (status) => {
       return (message = "Sản phẩm không đủ hàng");
     case "CART_NOT_FOUND":
       return (message = "Sản phẩm không đủ hàng");
+    case "QUERY_INVALID":
+      return (message = "Thiếu điều kiện");
     default:
       message = "lỗi";
   }
@@ -28,7 +30,8 @@ const convertMessageRegister = (status) => {
 };
 
 const toastService = (data) => {
-  const message = convertMessageRegister(data.data.message);
+  console.log(data.data.message);
+  const message = convertMessageRegister(data.data?.message || "");
 
   if (data.status === 200 || data.status === 201 || data.status === 203) {
     return toast.success(message);

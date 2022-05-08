@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
 import { useState, useEffect } from "react";
-const HeaderCart = ({ handleSelectAll, check, hideInput }) => {
+const HeaderCart = ({ handleSelectAll, check, hideInput, ...props }) => {
   const [select, setSelect] = useState(false);
   useEffect(() => {
     setSelect(check);
@@ -22,9 +22,13 @@ const HeaderCart = ({ handleSelectAll, check, hideInput }) => {
         )}
         Sản phẩm
       </div>
-      <div className={styles.flex1}>Đơn giá</div>
+      <div className={styles.flex1}>
+        {props.confirm ? "Thanh toán" : "Đơn giá"}
+      </div>
+
       <div className={styles.flex1}>Số lượng</div>
       <div className={styles.flex1}>Số tiền</div>
+      {props.confirm && <div className={styles.flex1}> Trạng thái</div>}
       <div className={styles.flex1}>Thao tác</div>
     </div>
   );

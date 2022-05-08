@@ -21,13 +21,13 @@
   line-height: 20px;
   border: 1px solid #ccc;
   &_check {
-    margin-left: 8rem;
     margin-right: 2rem;
     width: 3rem;
     height: 3rem;
     border: 1px solid #ccc;
   }
   &_img {
+    margin-left: 8rem;
     margin-right: 2rem;
     width: 13rem;
     height: 13rem;
@@ -67,5 +67,25 @@
     &:hover {
       opacity: 0.7;
     }
+  }
+  &_confirm {
+    cursor: pointer;
+    text-decoration: underline;
+    font-style: italic;
+    color: var(--primary-color);
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+.payment {
+  display: flex;
+  flex-direction: column;
+
+  &_type {
+    color: rgb(136, 209, 28);
+  }
+  &_status {
+    color: rgb(191, 89, 20);
   }
 }

@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import UserContext from "../../../../context_api/user/context";
 import { cartActions } from "../../../../redux/features/cart/cartSlice";
 
+import linkImg from "../../../../assets/linkImg";
+
 const DetailProductModal = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -68,7 +70,7 @@ const DetailProductModal = () => {
             src={
               currentProduct?.imgUrl && currentProduct?.imgUrl.length > 0
                 ? currentProduct.imgUrl[0]
-                : "http://media.doisongphapluat.com/711/2021/3/5/hot-girl-chung-khoan-ngo-huyen-thuong-dspl-5.jpg"
+                : linkImg.defaultImg
             }
           ></img>
           <div className={styles.detailP_body_arrImg__nth}>

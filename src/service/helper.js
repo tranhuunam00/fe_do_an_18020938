@@ -1,7 +1,18 @@
 const moment = require("moment");
-const { useEffect } = require("react");
+const { useEffect, useState } = require("react");
+const { useSelector } = require("react-redux");
+const {
+  selectorShowDialog,
+  selectorDialogShowModal,
+} = require("./../redux/features/dialog/dialogSlice");
 
-const { Filter, TypeProduct } = require("../constants/enums");
+const {
+  Filter,
+  TypeProduct,
+  StatusPayment,
+  StatusOrder,
+  TypePayment,
+} = require("../constants/enums");
 
 export const validateEmail = (email) => {
   var re =
@@ -116,26 +127,70 @@ export const convertTextFromFilter = (filter) => {
       return "Cây ngoài trời";
     case TypeProduct.KITS:
       return "Dụng cụ";
+    case StatusOrder.PREPARE:
+      return "Chuẩn bị";
+    case StatusPayment.AWAIT_MOMO:
+      return "Đợi thanh toán Momo";
+    case StatusPayment.SUCCESS:
+      return "Hoàn thành";
+    case StatusPayment.UNPAID:
+      return "Chưa thanh toán";
+    case StatusPayment.PAID:
+      return "Đã thanh toán";
+    case TypePayment.MOMO:
+      return "Momo";
+    case TypePayment.DIRECT:
+      return "Trực tiếp";
+    case StatusOrder.CANCEL:
+      return "Hủy";
+    case StatusOrder.PREPARE:
+      return "Chuẩn bị";
+    case StatusOrder.CONFIRM:
+      return "Đã chấp nhận";
+    case StatusOrder.DELIVERY_SHIP:
+      return "Giao cho ship";
+    case StatusOrder.SHIP:
+      return "Đang ship";
+    case StatusOrder.REVEICE:
+      return "Đã nhận";
+    case StatusOrder.SUCCESS:
+      return "Hoàn thành";
+    case StatusOrder.NOT_CONFIRMED:
+      return "Không chấp nhận";
+    default:
+      return "OK";
   }
 };
 
-export function useOutside(ref, setOpen) {
-  useEffect(() => {
-    /**
-     * Alert if clicked on outside of element
-     */
-    function handleClickOutside(event) {
-      if (ref.current && !ref.current.contains(event.target)) {
-        setOpen(false);
-      }
+export function useOutside(ref, setOpen, cl) {
+  const showModal = useSelector(selectorDialogShowModal);
+  const [showModelState, setShowModalState] = useState(showModal);
+  console.log("render");
+  /**
+   * Alert if clicked on outside of element
+   */
+  function handleClickOutside(event) {
+    if (showModelState) {
+      return;
     }
-    // Bind the event listener
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
+    console.log("qua");
+    if (ref.current && !ref.current.contains(event.target)) {
+      setOpen(false);
+    }
+  }
+
+  useEffect(() => {
+    if (showModal) {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    } else {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside);
+    }
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("touchstart", handleClickOutside);
     };
-  }, [ref, setOpen]);
+  }, [showModal, ref, setOpen]);
 }

@@ -189,10 +189,13 @@ const PaymentScreen = () => {
                       }
                       onClick={
                         !checkError(error)
-                          ? () => {
+                          ? (e) => {
+                              e.preventDefault();
                               setChangeAddress(false);
                             }
-                          : null
+                          : (e) => {
+                              e.preventDefault();
+                            }
                       }
                     >
                       Lưu
@@ -247,7 +250,20 @@ const PaymentScreen = () => {
                 <div className={styles.total_body_all}>
                   Tổng thanh toán:1430000 đ
                 </div>
-                <button className="undisabled" type="submit">
+                <button
+                  className={!checkError(error) ? "undisabled" : "disabled"}
+                  type="submit"
+                  onClick={
+                    !checkError(error)
+                      ? (events) => {
+                          {
+                          }
+                        }
+                      : (events) => {
+                          events.preventDefault();
+                        }
+                  }
+                >
                   Đặt hàng{" "}
                 </button>
               </div>

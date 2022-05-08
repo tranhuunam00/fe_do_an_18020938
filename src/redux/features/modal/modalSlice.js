@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { dialogActions } from "../dialog/dialogSlice";
 const initialState = {
   show: false,
   component: null,
@@ -11,6 +12,7 @@ const modalSlice = createSlice({
   reducers: {
     showModal(state) {
       state.show = true;
+      dialogActions.resetState();
     },
     hideModal(state) {
       state.show = false;
@@ -22,6 +24,9 @@ const modalSlice = createSlice({
     },
     resetState(state, action) {
       state = initialState;
+    },
+    changeValueState(state, action) {
+      state.valueState = action.payload;
     },
   },
 });

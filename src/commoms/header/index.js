@@ -65,13 +65,23 @@ const Header = () => {
             Hi {userState.user.lastName}!
           </button>
           <div className={styles.header_auth_list}>
-            <Link to="/cart" className={styles.header_auth_list__cart}>
-              <TiShoppingCart className={styles.header_auth_list__cart_svg} />
-              <div className={styles.header_auth_list__cart_amount}>6</div>
-            </Link>
-
+            {userState.user.role === "CUSTOMER" && (
+              <Link to="/cart" className={styles.header_auth_list__cart}>
+                <TiShoppingCart className={styles.header_auth_list__cart_svg} />
+                <div className={styles.header_auth_list__cart_amount}>6</div>
+              </Link>
+            )}
+            {userState.user.role === "SALLER" && (
+              <Link
+                to="/confirm-order"
+                className={styles.header_auth_list__cart}
+              >
+                <TiShoppingCart className={styles.header_auth_list__cart_svg} />
+                <div className={styles.header_auth_list__cart_amount}>6</div>
+              </Link>
+            )}
             <Link to="/profile">Trang cá nhân</Link>
-            <Link to="/cart">Khóa học</Link>
+            <Link to="/order">Đơn hàng</Link>
             <button
               onClick={() => {
                 handleLogout();
